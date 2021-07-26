@@ -1,36 +1,46 @@
-import javax.swing.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.List;
+
+import org.apache.poi.poifs.filesystem.DirectoryNode;
+import org.apache.poi.hwpf.HWPFDocument;
+import org.apache.poi.hwpf.extractor.WordExtractor;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+
 
 public class DataLoader {
-    private BufferedReader br;
+    private String filePath;
 
     public DataLoader(String filePath) {
-        try{
-            br = new BufferedReader(new FileReader(filePath));
-        }
-        catch (IOException exp){
-            exp.printStackTrace();
-        }
+        this.filePath = filePath;
+
     }
 
-    public void loadDataToFrame(GUI gui, DataFrame dataFrame) {
+    public void loadDataToFrame(DataFrame dataFrame) {
         String[] names = new String[0];
-        try {
-            readData(dataFrame, names);
-        }
-        catch (IOException exp){
-            exp.printStackTrace();
-        }
+
     }
 
-    private void readData(DataFrame dataFrame, String[] names) throws IOException {
-        boolean firstLine = true;
-        String line;
-        String[] currentLine;
-        while ((line = br.readLine()) != null) {
-
-        }
+    public void readData() {
+//        WordExtractor extractor = null;
+//        try {
+//            File file = new File(filePath);
+//            FileInputStream fis = new FileInputStream(file.getAbsolutePath());
+//
+//            HWPFDocument doc = new HWPFDocument(fis);
+//
+//            WordExtractor we = new WordExtractor(doc);
+//
+//            String[] paragraphs = we.getParagraphText();
+//
+//            System.out.println("Total no of paragraph "+paragraphs.length);
+//            for (String para : paragraphs) {
+//                System.out.println(para.toString());
+//            }
+//            fis.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+    //}
     }
 }

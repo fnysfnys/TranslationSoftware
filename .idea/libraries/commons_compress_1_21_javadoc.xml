@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="commons-compress-1.21-javadoc">
+    <CLASSES />
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/commons-compress-1.21/commons-compress-1.21-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>

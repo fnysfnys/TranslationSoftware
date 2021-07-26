@@ -47,7 +47,7 @@ public class GUI extends JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION){
             File file = fc.getSelectedFile();
             String filePath = file.getPath();
-            model.loadData(this, filePath);
+            model.loadData(filePath);
         }
         else{ System.exit(0); }
     }
@@ -55,7 +55,7 @@ public class GUI extends JFrame {
     private void createGUI() {
         dataTablePanel = new JPanel();
         String[][] data = {{"hi1", "hi1"}, {"hi2", "hi2"}};
-        dataTable = new JTable(model.getData(), columnNames);
+        dataTable = new JTable(data, columnNames);
         dataTableScrollPane = new JScrollPane(dataTable);
         dataTableScrollPane.setPreferredSize(new Dimension(1000, 600));
         dataTablePanel.add(dataTableScrollPane);
