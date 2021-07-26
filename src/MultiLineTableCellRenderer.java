@@ -24,6 +24,7 @@ public class MultiLineTableCellRenderer extends JTextArea
         setLineWrap(true);
         setWrapStyleWord(true);
         setOpaque(true);
+
     }
 
     public Component getTableCellRendererComponent(

@@ -67,12 +67,13 @@ public class GUI extends JFrame {
                 return String.class;
             }
             public boolean isCellEditable(int row, int column) {
-                return false;
+                return true;
             }
         };
 
         dm.setDataVector(data, new String[]{"From", "To"});
         dataTable = new JTable(dm);
+
         dataTable.setDefaultRenderer(String.class, new MultiLineTableCellRenderer());
         dataTableScrollPane = new JScrollPane(dataTable);
         dataTableScrollPane.setPreferredSize(new Dimension(1920, 1080));
