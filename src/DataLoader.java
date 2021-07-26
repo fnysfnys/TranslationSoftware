@@ -1,5 +1,8 @@
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.poi.poifs.filesystem.DirectoryNode;
@@ -18,29 +21,27 @@ public class DataLoader {
     }
 
     public void loadDataToFrame(DataFrame dataFrame) {
-        String[] names = new String[0];
+        try {
+            FileInputStream fis = new FileInputStream(filePath);
+            XWPFDocument document = new XWPFDocument(fis);
+            List<XWPFParagraph> paragraphs = document.getParagraphs();
+
+            for (XWPFParagraph paragraph : paragraphs) {
+                String paragraphText = paragraph.getText();
+                String[] sentences = paragraphText.split("\\. ");
+                for (String sentence:sentences){
+                    addSentenceToFrame(sentence, dataFrame);
+                }
+            }
+            fis.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 
-    public void readData() {
-//        WordExtractor extractor = null;
-//        try {
-//            File file = new File(filePath);
-//            FileInputStream fis = new FileInputStream(file.getAbsolutePath());
-//
-//            HWPFDocument doc = new HWPFDocument(fis);
-//
-//            WordExtractor we = new WordExtractor(doc);
-//
-//            String[] paragraphs = we.getParagraphText();
-//
-//            System.out.println("Total no of paragraph "+paragraphs.length);
-//            for (String para : paragraphs) {
-//                System.out.println(para.toString());
-//            }
-//            fis.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-    //}
+    private void addSentenceToFrame(String sentence, DataFrame dataFrame) {
+        dataFrame.addRow(sentence, "");
     }
 }

@@ -11,4 +11,12 @@ public class DataFrame {
         Row row = new Row(swedishValue, englishValue);
         dataFrame.add(row);
     }
+
+    public int getRowCount() {
+        return dataFrame.size();
+    }
+
+    public Row getRow(int index){
+        return dataFrame.get(index);
+    }
 }

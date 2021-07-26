@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.io.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 public class GUI extends JFrame {
     private JPanel dataTablePanel;
@@ -11,11 +13,13 @@ public class GUI extends JFrame {
     private JScrollPane dataTableScrollPane;
     private JFileChooser fc;
     private String[] columnNames = {"English", "Swedish"};
+    private String[][] data;
     private Model model;
 
     public GUI(){
         super("Translate");
         model = new Model();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         createFileChooser();
         attemptFileLoad();
         createGUI();
@@ -48,16 +52,30 @@ public class GUI extends JFrame {
             File file = fc.getSelectedFile();
             String filePath = file.getPath();
             model.loadData(filePath);
+            data = model.getData();
         }
         else{ System.exit(0); }
     }
 
     private void createGUI() {
         dataTablePanel = new JPanel();
-        String[][] data = {{"hi1", "hi1"}, {"hi2", "hi2"}};
-        dataTable = new JTable(data, columnNames);
+
+        //dataTable = new JTable(data, columnNames);
+
+        DefaultTableModel dm = new DefaultTableModel() {
+            public Class<String> getColumnClass(int columnIndex) {
+                return String.class;
+            }
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        dm.setDataVector(data, new String[]{"From", "To"});
+        dataTable = new JTable(dm);
+        dataTable.setDefaultRenderer(String.class, new MultiLineTableCellRenderer());
         dataTableScrollPane = new JScrollPane(dataTable);
-        dataTableScrollPane.setPreferredSize(new Dimension(1000, 600));
+        dataTableScrollPane.setPreferredSize(new Dimension(1920, 1080));
         dataTablePanel.add(dataTableScrollPane);
     }
 

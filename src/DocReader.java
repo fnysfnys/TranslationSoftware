@@ -19,8 +19,6 @@ public class DocReader
 
                 List<XWPFParagraph> paragraphs = document.getParagraphs();
 
-
-
                 for (XWPFParagraph para : paragraphs) {
                     para.getText();
                     System.out.println(para.getText());
