@@ -20,6 +20,8 @@ public class GUI extends JFrame {
     private Model model;
     private JMenuBar menuBar;
     private JMenu fileMenu;
+    private JPanel infoDisplayPanel;
+    private JLabel lastSaveLabel;
 
     public GUI(){
         super("Translate");
@@ -98,8 +100,8 @@ public class GUI extends JFrame {
     }
 
     private void createInfoDisplay() {
-        JPanel infoDisplayPanel = new JPanel(new BorderLayout());
-        JLabel lastSaveLabel = new JLabel("Last Saved: " + getCurrentDateTime());
+        infoDisplayPanel = new JPanel(new BorderLayout());
+        lastSaveLabel = new JLabel("Last Saved: " + getCurrentDateTime());
         JLabel memoryLabel = new JLabel("Memory In Use: --");
         infoDisplayPanel.add(lastSaveLabel, BorderLayout.WEST);
         infoDisplayPanel.add(memoryLabel, BorderLayout.EAST);
@@ -142,21 +144,30 @@ public class GUI extends JFrame {
     }
 
     private void createNewMemory() {
-
+        JFileChooser fc = new JFileChooser(".");
+        fc.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter csvFilter = new FileNameExtensionFilter("CSV Files", "csv");
+        fc.addChoosableFileFilter(csvFilter);
+        int returnVal = fc.showSaveDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            String newMemoryFilePath = file.getPath();
+            model.createMemory(newMemoryFilePath);
+        }
     }
 
     private void createLoadMenu() {
-        JMenu saveAsMenu = new JMenu("Load...");
+        JMenu loadMenu = new JMenu("Load...");
         JMenuItem savedProjectItem = new JMenuItem("saved project");
         JMenuItem loadMemoryItem = new JMenuItem("translation memory");
 
-        saveAsMenu.add(savedProjectItem);
-        saveAsMenu.add(loadMemoryItem);
+        loadMenu.add(savedProjectItem);
+        loadMenu.add(loadMemoryItem);
 
         savedProjectItem.addActionListener((ActionEvent e) -> loadProject());
         loadMemoryItem.addActionListener((ActionEvent e) -> loadMemory());
 
-        fileMenu.add(saveAsMenu);
+        fileMenu.add(loadMenu);
     }
 
     private void loadDocument() {
@@ -171,7 +182,9 @@ public class GUI extends JFrame {
             model.loadDataFromProj(filePath);
             data = model.getData();
         }
-        else{ displayErrorMessage("can not read this file", "file error"); }
+        else{
+            displayErrorMessage("can not read this file", "file error");
+        }
         updateFrame();
     }
 
@@ -212,6 +225,14 @@ public class GUI extends JFrame {
             String filePathToSave = file.getPath();
             model.saveProject(filePathToSave, dataTable);
         }
+        updateSaveDate();
+    }
+
+    private void updateSaveDate() {
+        infoDisplayPanel.remove(lastSaveLabel);
+        lastSaveLabel = new JLabel("Last Save: " + getCurrentDateTime());
+        infoDisplayPanel.add(lastSaveLabel, BorderLayout.WEST);
+
     }
 
     private void createTable() {

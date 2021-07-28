@@ -5,7 +5,9 @@ public class Model {
 
     private DataFrame dataFrame;
 
-    public Model() { }
+    public Model() {
+        dataFrame = new DataFrame();
+    }
 
     public void loadDataFromDoc(String fileName) {
         dataFrame = new DataFrame();
@@ -68,5 +70,10 @@ public class Model {
         catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void createMemory(String newMemoryFilePath) {
+        CSVWriter csvWriter = new CSVWriter();
+        csvWriter.createMemoryFile(newMemoryFilePath);
     }
 }

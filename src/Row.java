@@ -4,9 +4,9 @@ public class Row implements Serializable {
     private String fromValue;
     private String toValue;
 
-    public Row(String swedishValue, String englishValue){
-        this.fromValue = swedishValue;
-        this.toValue = englishValue;
+    public Row(String fromValue, String toValue){
+        this.fromValue = fromValue;
+        this.toValue = toValue;
     }
 
     public void setFromValue(String newValue){
