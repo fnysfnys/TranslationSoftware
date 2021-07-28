@@ -24,7 +24,7 @@ public class DataLoader {
         try {
             FileInputStream fis = new FileInputStream(filePath);
             XWPFDocument document = new XWPFDocument(fis);
-            dataFrame.setCurrentDocument(document);
+            dataFrame.setSourceFilePath(filePath);
             List<XWPFParagraph> paragraphs = document.getParagraphs();
 
             for (XWPFParagraph paragraph : paragraphs) {
@@ -42,7 +42,7 @@ public class DataLoader {
     }
 
     private void loadMemoryToFrame(DataFrame dataFrame){
-        
+
     }
 
     private void addSentenceToFrame(String sentence, DataFrame dataFrame) {

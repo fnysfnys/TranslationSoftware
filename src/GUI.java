@@ -1,5 +1,7 @@
 import java.awt.*;
 import javax.swing.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.io.*;
@@ -8,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
 public class GUI extends JFrame {
+    private final JPanel dataViewPanel;
     private JPanel dataTablePanel;
     private JTable dataTable;
     private JScrollPane dataTableScrollPane;
@@ -21,6 +24,7 @@ public class GUI extends JFrame {
     public GUI(){
         super("Translate");
         model = new Model();
+        dataViewPanel = new JPanel(new BorderLayout());
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         createFileChooser();
         createGUI();
@@ -52,7 +56,7 @@ public class GUI extends JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION){
             File file = fc.getSelectedFile();
             String filePath = file.getPath();
-            model.loadData(filePath);
+            model.loadDataFromDoc(filePath);
             data = model.getData();
         }
         else{ displayErrorMessage("can not read this file", "file error"); }
@@ -90,6 +94,22 @@ public class GUI extends JFrame {
     private void createGUI() {
         createMenu();
         createTable();
+        createInfoDisplay();
+    }
+
+    private void createInfoDisplay() {
+        JPanel infoDisplayPanel = new JPanel(new BorderLayout());
+        JLabel lastSaveLabel = new JLabel("Last Saved: " + getCurrentDateTime());
+        JLabel memoryLabel = new JLabel("Memory In Use: --");
+        infoDisplayPanel.add(lastSaveLabel, BorderLayout.WEST);
+        infoDisplayPanel.add(memoryLabel, BorderLayout.EAST);
+        dataViewPanel.add(infoDisplayPanel, BorderLayout.SOUTH);
+    }
+
+    private String getCurrentDateTime() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        return dtf.format(now);
     }
 
     private void createMenu(){
@@ -100,25 +120,42 @@ public class GUI extends JFrame {
 
     private void createFileMenu() {
         fileMenu = new JMenu("File");
+        createNewMenu();
         createLoadMenu();
         createSaveAsMenu();
         createExportMenu();
         menuBar.add(fileMenu);
     }
 
+    private void createNewMenu() {
+        JMenu newMenu = new JMenu("new...");
+        JMenuItem newDocumentItem = new JMenuItem("new document");
+        JMenuItem newTranslationMemoryItem = new JMenuItem("new translation memory");
+
+        newMenu.add(newTranslationMemoryItem);
+        newMenu.add(newDocumentItem);
+
+        newDocumentItem.addActionListener((ActionEvent e) -> loadDocument());
+        newTranslationMemoryItem.addActionListener((ActionEvent e) -> createNewMemory());
+
+        fileMenu.add(newMenu);
+    }
+
+    private void createNewMemory() {
+
+    }
+
     private void createLoadMenu() {
         JMenu saveAsMenu = new JMenu("Load...");
         JMenuItem savedProjectItem = new JMenuItem("saved project");
         JMenuItem loadMemoryItem = new JMenuItem("translation memory");
-        JMenuItem loadDocumentItem = new JMenuItem("new document");
 
         saveAsMenu.add(savedProjectItem);
         saveAsMenu.add(loadMemoryItem);
-        saveAsMenu.add(loadDocumentItem);
 
         savedProjectItem.addActionListener((ActionEvent e) -> loadProject());
         loadMemoryItem.addActionListener((ActionEvent e) -> loadMemory());
-        loadDocumentItem.addActionListener((ActionEvent e) -> loadDocument());
+
         fileMenu.add(saveAsMenu);
     }
 
@@ -127,6 +164,15 @@ public class GUI extends JFrame {
     }
 
     private void loadProject() {
+        int returnVal = fc.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION){
+            File file = fc.getSelectedFile();
+            String filePath = file.getPath();
+            model.loadDataFromProj(filePath);
+            data = model.getData();
+        }
+        else{ displayErrorMessage("can not read this file", "file error"); }
+        updateFrame();
     }
 
     private void loadMemory() {
@@ -156,7 +202,16 @@ public class GUI extends JFrame {
     }
 
     private void saveAsTranslationProject() {
-        System.out.println("saved.");
+        JFileChooser fc = new JFileChooser(".");
+        fc.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter csvFilter = new FileNameExtensionFilter("TMP Files", "tmp");
+        fc.addChoosableFileFilter(csvFilter);
+        int returnVal = fc.showSaveDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            String filePathToSave = file.getPath();
+            model.saveProject(filePathToSave, dataTable);
+        }
     }
 
     private void createTable() {
@@ -166,10 +221,11 @@ public class GUI extends JFrame {
         dataTableScrollPane = new JScrollPane(dataTable);
         dataTableScrollPane.setPreferredSize(new Dimension(1920, 1080));
         dataTablePanel.add(dataTableScrollPane);
+        dataViewPanel.add(dataTablePanel, BorderLayout.CENTER);
     }
 
     private void finalizeGUI() {
-        add(dataTablePanel);
+        this.add(dataViewPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setVisible(true);

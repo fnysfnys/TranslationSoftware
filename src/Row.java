@@ -1,27 +1,27 @@
-import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Row {
-    private String swedishValue;
-    private String englishValue;
+public class Row implements Serializable {
+    private String fromValue;
+    private String toValue;
 
     public Row(String swedishValue, String englishValue){
-        this.swedishValue = swedishValue;
-        this.englishValue = englishValue;
+        this.fromValue = swedishValue;
+        this.toValue = englishValue;
     }
 
-    public void setSwedishValue(String newValue){
-        this.swedishValue = newValue;
+    public void setFromValue(String newValue){
+        this.fromValue = newValue;
     }
 
-    public void setEnglishValue(String newValue){
-        this.swedishValue = newValue;
+    public void setToValue(String newValue){
+        this.toValue = newValue;
     }
 
-    public String getSwedishValue() {
-        return swedishValue;
+    public String getFromValue() {
+        return fromValue;
     }
 
-    public String getEnglishValue() {
-        return englishValue;
+    public String getToValue() {
+        return toValue;
     }
 }

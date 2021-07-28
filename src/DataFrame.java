@@ -1,11 +1,12 @@
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 import javax.swing.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DataFrame {
+public class DataFrame implements Serializable {
     private ArrayList<Row> dataFrame;
-    private XWPFDocument document;
+    private String sourceFilePath;
 
     private String memoryFilePath;
 
@@ -22,12 +23,12 @@ public class DataFrame {
         return dataFrame.size();
     }
 
-    public void setCurrentDocument(XWPFDocument document){
-        this.document = document;
+    public void setSourceFilePath(String sourceFilePath){
+        this.sourceFilePath = sourceFilePath;
     }
 
-    public void setMemoryFilePath(XWPFDocument document){
-        this.memoryFilePath = memoryFilePath;
+    public void setMemoryFilePath(String memFilePath){
+        this.memoryFilePath = memFilePath;
     }
 
     public Row getRow(int index){
