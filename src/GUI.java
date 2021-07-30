@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.io.*;
+import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
@@ -72,21 +73,27 @@ public class GUI extends JFrame {
         dataTable.setAutoCreateRowSorter(true);
         dataTableScrollPane = new JScrollPane(dataTable);
 
-        jTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent event) {
-                if (jTable.getSelectedRow() > -1) {
-                    // print first column value from selected row
-                    System.out.println(jTable.getValueAt(jTable.getSelectedRow(), 0).toString());
-                }
-            }
-        });
-
         dataTableScrollPane.setPreferredSize(new Dimension(1920, 1080));
         dataTablePanel.add(dataTableScrollPane);
+
+        addAutoSaveActionListener();
+
         dataTablePanel.revalidate();
         dataTablePanel.validate();
         dataTablePanel.repaint();
+    }
+
+    private void addAutoSaveActionListener() {
+        dataTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent event) {
+                if (dataTable.getSelectedRow() > -1) {
+                    if(model.autoSavable()){
+                        
+                    }
+                }
+            }
+        });
     }
 
     private void createTableModel() {
@@ -103,6 +110,7 @@ public class GUI extends JFrame {
         dataTable = new JTable(dm);
 
         dataTable.setDefaultRenderer(String.class, new MultiLineTableCellRenderer());
+        addAutoSaveActionListener();
     }
 
     private void createGUI() {

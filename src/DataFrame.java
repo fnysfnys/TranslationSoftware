@@ -26,6 +26,10 @@ public class DataFrame implements Serializable {
         this.sourceFilePath = sourceFilePath;
     }
 
+    public boolean autoSavable(){
+        return sourceFilePath != null;
+    }
+
     public Row getRow(int index){
         return dataFrame.get(index);
     }
