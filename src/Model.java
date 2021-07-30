@@ -4,6 +4,7 @@ import java.io.*;
 public class Model {
 
     private DataFrame dataFrame;
+    private TranslationMemory translationMemory;
 
     public Model() {
         dataFrame = new DataFrame();
@@ -33,10 +34,20 @@ public class Model {
 
         try {
             WriteDataFrame(filePathToSave);
+            WriteTranslationMemory();
         }
         catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private void WriteTranslationMemory() throws IOException {
+        FileOutputStream fos = new FileOutputStream(this.translationMemory.getFilePath());
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+        oos.writeObject(this.translationMemory);
+
+        oos.close();
     }
 
     private void WriteDataFrame(String filePathToSave) throws IOException {
@@ -73,7 +84,7 @@ public class Model {
     }
 
     public void createMemory(String newMemoryFilePath) {
-        CSVWriter csvWriter = new CSVWriter();
-        csvWriter.createMemoryFile(newMemoryFilePath);
+        this.translationMemory = new TranslationMemory(newMemoryFilePath);
+
     }
 }

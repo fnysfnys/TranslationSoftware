@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.io.*;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -70,6 +71,17 @@ public class GUI extends JFrame {
         createTableModel();
         dataTable.setAutoCreateRowSorter(true);
         dataTableScrollPane = new JScrollPane(dataTable);
+
+        jTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent event) {
+                if (jTable.getSelectedRow() > -1) {
+                    // print first column value from selected row
+                    System.out.println(jTable.getValueAt(jTable.getSelectedRow(), 0).toString());
+                }
+            }
+        });
+
         dataTableScrollPane.setPreferredSize(new Dimension(1920, 1080));
         dataTablePanel.add(dataTableScrollPane);
         dataTablePanel.revalidate();
@@ -102,7 +114,7 @@ public class GUI extends JFrame {
     private void createInfoDisplay() {
         infoDisplayPanel = new JPanel(new BorderLayout());
         lastSaveLabel = new JLabel("Last Saved: " + getCurrentDateTime());
-        JLabel memoryLabel = new JLabel("Memory In Use: --");
+        JLabel memoryLabel = new JLabel("Active Translation Memory: --");
         infoDisplayPanel.add(lastSaveLabel, BorderLayout.WEST);
         infoDisplayPanel.add(memoryLabel, BorderLayout.EAST);
         dataViewPanel.add(infoDisplayPanel, BorderLayout.SOUTH);

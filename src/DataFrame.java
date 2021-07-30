@@ -6,9 +6,8 @@ import java.util.ArrayList;
 
 public class DataFrame implements Serializable {
     private ArrayList<Row> dataFrame;
-    private String sourceFilePath;
 
-    private String memoryFilePath;
+    private String sourceFilePath;
 
     public DataFrame(){
         dataFrame = new ArrayList<>();
@@ -25,10 +24,6 @@ public class DataFrame implements Serializable {
 
     public void setSourceFilePath(String sourceFilePath){
         this.sourceFilePath = sourceFilePath;
-    }
-
-    public void setMemoryFilePath(String memFilePath){
-        this.memoryFilePath = memFilePath;
     }
 
     public Row getRow(int index){
