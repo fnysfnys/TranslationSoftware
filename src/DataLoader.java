@@ -1,13 +1,6 @@
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.poi.poifs.filesystem.DirectoryNode;
-import org.apache.poi.hwpf.HWPFDocument;
-import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 
@@ -24,7 +17,7 @@ public class DataLoader {
         try {
             FileInputStream fis = new FileInputStream(filePath);
             XWPFDocument document = new XWPFDocument(fis);
-            dataFrame.setSourceFilePath(filePath);
+            dataFrame.setSourceDocxFilePath(filePath);
             List<XWPFParagraph> paragraphs = document.getParagraphs();
 
             for (XWPFParagraph paragraph : paragraphs) {

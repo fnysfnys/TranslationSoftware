@@ -24,9 +24,11 @@ public class GUI extends JFrame {
     private JMenu fileMenu;
     private JPanel infoDisplayPanel;
     private JLabel lastSaveLabel;
+    private JLabel autoSaveIndicationLabel;
+    private JLabel memoryLabel;
 
     public GUI(){
-        super("Translate");
+        super("Translation Project (NOT SAVED)");
         model = new Model();
         dataViewPanel = new JPanel(new BorderLayout());
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -63,7 +65,9 @@ public class GUI extends JFrame {
             model.loadDataFromDoc(filePath);
             data = model.getData();
         }
-        else{ displayErrorMessage("can not read this file", "file error"); }
+        else {
+            //handle no file chosen
+        }
         updateFrame();
     }
 
@@ -89,7 +93,12 @@ public class GUI extends JFrame {
             public void valueChanged(ListSelectionEvent event) {
                 if (dataTable.getSelectedRow() > -1) {
                     if(model.autoSavable()){
-                        
+                        model.autoSave(dataTable);
+                        updateSaveDate();
+                        System.out.println("auto saved."); //test code
+                    }
+                    else{
+                        //continue.
                     }
                 }
             }
@@ -121,9 +130,11 @@ public class GUI extends JFrame {
 
     private void createInfoDisplay() {
         infoDisplayPanel = new JPanel(new BorderLayout());
-        lastSaveLabel = new JLabel("Last Saved: " + getCurrentDateTime());
-        JLabel memoryLabel = new JLabel("Active Translation Memory: --");
+        lastSaveLabel = new JLabel("    Last Saved: --");
+        autoSaveIndicationLabel = new JLabel("Auto Save: OFF", SwingConstants.CENTER);
+        memoryLabel = new JLabel("Active Translation Memory: --    ");
         infoDisplayPanel.add(lastSaveLabel, BorderLayout.WEST);
+        infoDisplayPanel.add(autoSaveIndicationLabel, BorderLayout.CENTER);
         infoDisplayPanel.add(memoryLabel, BorderLayout.EAST);
         dataViewPanel.add(infoDisplayPanel, BorderLayout.SOUTH);
     }
@@ -201,9 +212,12 @@ public class GUI extends JFrame {
             String filePath = file.getPath();
             model.loadDataFromProj(filePath);
             data = model.getData();
+            autoSaveIndicationLabel.setText("Auto Save: ON");
+            updateSaveDate();
+            this.setTitle(filePath);
         }
         else{
-            displayErrorMessage("can not read this file", "file error");
+            //handle no file chosen
         }
         updateFrame();
     }
@@ -239,20 +253,20 @@ public class GUI extends JFrame {
         fc.setAcceptAllFileFilterUsed(false);
         FileNameExtensionFilter csvFilter = new FileNameExtensionFilter("TMP Files", "tmp");
         fc.addChoosableFileFilter(csvFilter);
+        String filePathToSave;
         int returnVal = fc.showSaveDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fc.getSelectedFile();
-            String filePathToSave = file.getPath();
+            filePathToSave = file.getPath();
             model.saveProject(filePathToSave, dataTable);
+            autoSaveIndicationLabel.setText("Auto Save: ON");
+            updateSaveDate();
+            this.setTitle(filePathToSave);
         }
-        updateSaveDate();
     }
 
     private void updateSaveDate() {
-        infoDisplayPanel.remove(lastSaveLabel);
-        lastSaveLabel = new JLabel("Last Save: " + getCurrentDateTime());
-        infoDisplayPanel.add(lastSaveLabel, BorderLayout.WEST);
-
+        lastSaveLabel.setText("    Last Save: " + getCurrentDateTime());
     }
 
     private void createTable() {

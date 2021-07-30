@@ -34,7 +34,7 @@ public class Model {
 
         try {
             WriteDataFrame(filePathToSave);
-            WriteTranslationMemory();
+            //WriteTranslationMemory();
         }
         catch (Exception e){
             e.printStackTrace();
@@ -53,6 +53,8 @@ public class Model {
     private void WriteDataFrame(String filePathToSave) throws IOException {
         FileOutputStream fos = new FileOutputStream(filePathToSave);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+        this.dataFrame.setProjectFilePath(filePathToSave);
 
         oos.writeObject(this.dataFrame);
 
@@ -86,5 +88,21 @@ public class Model {
     public void createMemory(String newMemoryFilePath) {
         this.translationMemory = new TranslationMemory(newMemoryFilePath);
 
+    }
+
+    public boolean autoSavable() {
+        return dataFrame.autoSavable();
+    }
+
+    public void autoSave(JTable dataTable) {
+        getNonSavedValuesFromTable(dataTable);
+
+        try {
+            WriteDataFrame(dataFrame.getProjectFilePath());
+            //WriteTranslationMemory();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
