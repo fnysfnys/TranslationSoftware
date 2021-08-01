@@ -92,13 +92,15 @@ public class GUI extends JFrame {
             @Override
             public void valueChanged(ListSelectionEvent event) {
                 if (dataTable.getSelectedRow() > -1) {
+                    model.getNonSavedValuesFromTable(dataTable);
+
+                    if(model.memoryLoaded()){
+                        model.saveMemory(dataTable);
+                    }
                     if(model.autoSavable()){
                         model.autoSave(dataTable);
                         updateSaveDate();
                         System.out.println("auto saved."); //test code
-                    }
-                    else{
-                        //continue.
                     }
                 }
             }
@@ -228,11 +230,8 @@ public class GUI extends JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION){
             File file = fc.getSelectedFile();
             String filePath = file.getPath();
-            model.loadDataFromProj(filePath);
-            data = model.getData();
-            autoSaveIndicationLabel.setText("Auto Save: ON");
-            updateSaveDate();
-            this.setTitle(filePath);
+            model.loadMemory(filePath, dataTable);
+            memoryLabel.setText("Active Translation Memory: " + filePath + "    ");
         }
         else{
             //handle no file chosen

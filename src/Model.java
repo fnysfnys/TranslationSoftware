@@ -30,15 +30,24 @@ public class Model {
         return data;
     }
 
-    public void saveProject(String filePathToSave, JTable dataTable) {
-        getNonSavedValuesFromTable(dataTable);
-        if(this.translationMemory != null) {
-            fillTranslationMemory(dataTable);
+    public boolean memoryLoaded(){
+        return this.translationMemory != null;
+    }
+
+    public void saveMemory(JTable dataTable) {
+        fillTranslationMemory(dataTable);
+        try {
+            WriteTranslationMemory();
+        }
+        catch (Exception e){
+            e.printStackTrace();
         }
 
+    }
+
+    public void saveProject(String filePathToSave, JTable dataTable) {
         try {
             WriteDataFrame(filePathToSave);
-            WriteTranslationMemory();
         }
         catch (Exception e){
             e.printStackTrace();
@@ -49,7 +58,7 @@ public class Model {
         int rowCount = dataFrame.getRowCount();
 
         for (int row = 0; row < rowCount; row++) {
-            if(!translationMemory.inMemory((String) dataTable.getValueAt(row, 1))){
+            if(!translationMemory.inMemory((String) dataTable.getValueAt(row, 0))){
                 translationMemory.addTranslation((String) dataTable.getValueAt(row, 0), (String) dataTable.getValueAt(row, 1));
             }
         }
@@ -75,7 +84,7 @@ public class Model {
         oos.close();
     }
 
-    private void getNonSavedValuesFromTable(JTable dataTable) {
+    public void getNonSavedValuesFromTable(JTable dataTable) {
         int rowCount = dataFrame.getRowCount();
         String currentValue;
         Row currentRow;
@@ -112,7 +121,39 @@ public class Model {
 
         try {
             WriteDataFrame(dataFrame.getProjectFilePath());
-            //WriteTranslationMemory();
+            WriteTranslationMemory();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void loadMemory(String filePath, JTable dataTable) {
+        loadMemoryToModel(filePath);
+        loadMemoryToFrame(filePath, dataTable);
+    }
+
+    private void loadMemoryToFrame(String filePath, JTable dataTable) {
+        dataFrame.setMemoryFilePath(filePath);
+        int rowCount = dataFrame.getRowCount();
+        Row currentRow;
+        for (int row = 0; row < rowCount; row++) {
+            currentRow = dataFrame.getRow(row);
+            if(translationMemory.inMemory(currentRow.getFromValue())){
+                currentRow.setToValue(translationMemory.getTranslation(currentRow.getFromValue()));
+                dataTable.setValueAt(translationMemory.getTranslation(currentRow.getFromValue()), row, 1);
+            }
+        }
+    }
+
+    private void loadMemoryToModel(String filePath) {
+        try {
+            FileInputStream fis = new FileInputStream(filePath);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+
+            this.translationMemory = (TranslationMemory) ois.readObject();
+
+            ois.close();
         }
         catch (Exception e){
             e.printStackTrace();
