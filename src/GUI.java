@@ -184,6 +184,7 @@ public class GUI extends JFrame {
             File file = fc.getSelectedFile();
             String newMemoryFilePath = file.getPath();
             model.createMemory(newMemoryFilePath);
+            memoryLabel.setText("Active Translation Memory: " + newMemoryFilePath + "    ");
         }
     }
 
@@ -223,7 +224,19 @@ public class GUI extends JFrame {
     }
 
     private void loadMemory() {
-        
+        int returnVal = fc.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION){
+            File file = fc.getSelectedFile();
+            String filePath = file.getPath();
+            model.loadDataFromProj(filePath);
+            data = model.getData();
+            autoSaveIndicationLabel.setText("Auto Save: ON");
+            updateSaveDate();
+            this.setTitle(filePath);
+        }
+        else{
+            //handle no file chosen
+        }
     }
 
     private void createExportMenu() {

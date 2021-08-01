@@ -8,6 +8,8 @@ public class DataFrame implements Serializable {
 
     private String projectFilePath;
 
+    private String memoryFilePath;
+
     public DataFrame(){
         dataFrame = new ArrayList<>();
     }
@@ -39,6 +41,14 @@ public class DataFrame implements Serializable {
 
     public boolean autoSavable(){
         return projectFilePath != null;
+    }
+
+    public void setMemoryFilePath(String memoryFilePath) {
+        this.memoryFilePath = memoryFilePath;
+    }
+
+    public String getMemoryFilePath(){
+        return this.memoryFilePath;
     }
 
     public Row getRow(int index){

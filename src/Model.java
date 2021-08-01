@@ -4,6 +4,7 @@ import java.io.*;
 public class Model {
 
     private DataFrame dataFrame;
+
     private TranslationMemory translationMemory;
 
     public Model() {
@@ -31,13 +32,26 @@ public class Model {
 
     public void saveProject(String filePathToSave, JTable dataTable) {
         getNonSavedValuesFromTable(dataTable);
+        if(this.translationMemory != null) {
+            fillTranslationMemory(dataTable);
+        }
 
         try {
             WriteDataFrame(filePathToSave);
-            //WriteTranslationMemory();
+            WriteTranslationMemory();
         }
         catch (Exception e){
             e.printStackTrace();
+        }
+    }
+
+    private void fillTranslationMemory(JTable dataTable) {
+        int rowCount = dataFrame.getRowCount();
+
+        for (int row = 0; row < rowCount; row++) {
+            if(!translationMemory.inMemory((String) dataTable.getValueAt(row, 1))){
+                translationMemory.addTranslation((String) dataTable.getValueAt(row, 0), (String) dataTable.getValueAt(row, 1));
+            }
         }
     }
 
@@ -87,7 +101,6 @@ public class Model {
 
     public void createMemory(String newMemoryFilePath) {
         this.translationMemory = new TranslationMemory(newMemoryFilePath);
-
     }
 
     public boolean autoSavable() {
