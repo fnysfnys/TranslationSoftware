@@ -1,6 +1,8 @@
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.sql.SQLOutput;
 
 public class StartPage extends JFrame {
     private JPanel startPagePanel;
@@ -37,12 +39,28 @@ public class StartPage extends JFrame {
         loadProjectButton.setPreferredSize(buttonDimensions);
         loadFilesToMemoryButton.setPreferredSize(buttonDimensions);
 
+        newProjectButton.addActionListener((ActionEvent e) -> newProject());
+        loadProjectButton.addActionListener((ActionEvent e) -> loadProject());
+        loadFilesToMemoryButton.addActionListener((ActionEvent e) -> loadFilesToMemory());
 
         optionsPanel.add(newProjectButton);
         optionsPanel.add(loadProjectButton);
         optionsPanel.add(loadFilesToMemoryButton);
 
         startPagePanel.add(optionsPanel, BorderLayout.SOUTH);
+    }
+
+    private void newProject() {
+        SwingUtilities.invokeLater(StartPage::new);
+        this.dispose();
+    }
+
+    private void loadProject() {
+        System.out.println("load proj");
+    }
+
+    private void loadFilesToMemory() {
+        System.out.println("load files to mem");
     }
 
     private void finalizeStartPage() {
