@@ -51,7 +51,7 @@ public class StartPage extends JFrame {
     }
 
     private void newProject() {
-        SwingUtilities.invokeLater(StartPage::new);
+        SwingUtilities.invokeLater(NewProjectFileSelection::new);
         this.dispose();
     }
 
