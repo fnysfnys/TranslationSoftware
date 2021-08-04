@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
-public class NewProjectFileSelection extends JFrame {
+public class NewProjectFileSelectionUI extends JFrame {
 
     private projectLauncher projectLauncher;
 
@@ -21,11 +21,13 @@ public class NewProjectFileSelection extends JFrame {
     private JButton selectMemoryButton;
     private JButton createMemoryButton;
 
-    public NewProjectFileSelection(){
+    public NewProjectFileSelectionUI(){
         super("New Project");
+        this.setPreferredSize(new Dimension(650, 150));
+
         newProjectFileSelectionPanel = new JPanel(new BorderLayout());
 
-        projectLauncher projectLauncher = new projectLauncher();
+        projectLauncher = new projectLauncher();
 
         createNewProjectFileSelection();
         finalizeNewProjectFileSelection();
@@ -132,23 +134,25 @@ public class NewProjectFileSelection extends JFrame {
         newProjectFileSelectionPanel.add(labelPanel, BorderLayout.NORTH);
     }
 
-    private void finalizeNewProjectFileSelection() {
-        this.add(newProjectFileSelectionPanel);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pack();
-        setVisible(true);
-    }
-
     private void attemptLaunch(){
         if(projectLauncher.readyToLaunch()){
             JButton launchButton = new JButton("Launch");
-            createMemoryButton.addActionListener((ActionEvent e) -> launch());
+            launchButton.addActionListener((ActionEvent e) -> launch());
             newProjectFileSelectionPanel.add(launchButton, BorderLayout.SOUTH);
         }
     }
 
     private void launch() {
+        SwingUtilities.invokeLater(ProjectUI::new);
+        this.dispose();
+    }
 
+    private void finalizeNewProjectFileSelection() {
+        this.add(newProjectFileSelectionPanel);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.pack();
+        this.setLocationRelativeTo(null);
+        setVisible(true);
     }
 
 }

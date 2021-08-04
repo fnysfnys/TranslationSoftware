@@ -1,10 +1,8 @@
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.sql.SQLOutput;
 
-public class StartPage extends JFrame {
+public class StartPageUI extends JFrame {
     private JPanel startPagePanel;
     private JLabel startMessageDisplayLabel;
     private JPanel optionsPanel;
@@ -13,8 +11,9 @@ public class StartPage extends JFrame {
     private JButton loadProjectButton;
     private JButton loadFilesToMemoryButton;
 
-    public StartPage(){
+    public StartPageUI(){
         super("Smart Translate");
+
         startPagePanel = new JPanel(new BorderLayout());
         createStartPage();
         finalizeStartPage();
@@ -51,7 +50,7 @@ public class StartPage extends JFrame {
     }
 
     private void newProject() {
-        SwingUtilities.invokeLater(NewProjectFileSelection::new);
+        SwingUtilities.invokeLater(NewProjectFileSelectionUI::new);
         this.dispose();
     }
 
@@ -66,7 +65,8 @@ public class StartPage extends JFrame {
     private void finalizeStartPage() {
         this.add(startPagePanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pack();
+        this.pack();
+        this.setLocationRelativeTo(null);
         setVisible(true);
     }
 }

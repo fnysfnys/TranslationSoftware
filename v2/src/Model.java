@@ -9,11 +9,12 @@ public class Model {
     private TranslationMemory translationMemory;
     private XWPFDocument document;
 
-    //GET FILES {
 
     public Model(){
         dataFrame = new DataFrame();
     }
+
+    //GET FILES {
 
     public void setTranslationMemory(TranslationMemory translationMemory) {
         this.translationMemory = translationMemory;
@@ -41,4 +42,13 @@ public class Model {
         this.projectPath = projectPath;
     }
     // } GET FILES
+
+    public void loadDocumentToFrame(){
+        DataLoader dataLoader = new DataLoader(document);
+        dataLoader.loadDocumentToFrame(dataFrame, translationMemory);
+    }
+
+    public String[][] getTableData() {
+
+    }
 }

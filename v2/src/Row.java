@@ -1,12 +1,14 @@
 import java.io.Serializable;
 
-public class Translation implements Serializable {
+public class Row implements Serializable {
     private String original;
     private String translation;
+    private int paragraphIndex;
 
-    public Translation(String original, String translation){
+    public Row(String original, String translation, int paragraphIndex){
         this.original = original;
         this.translation = translation;
+        this.paragraphIndex = paragraphIndex;
     }
 
     public String getOriginal() {
@@ -23,5 +25,9 @@ public class Translation implements Serializable {
 
     public void setTranslation(String translation) {
         this.translation = translation;
+    }
+
+    public int getParagraphIndex(){
+        return paragraphIndex;
     }
 }

@@ -2,13 +2,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class DataFrame implements Serializable {
-    private ArrayList<Translation> translations;
+
+    private ArrayList<Row> dataFrame;
+
     private String selectedMemoryPath;
     private String sourcePath;
 
     public DataFrame(){
-        translations = new ArrayList<>();
+        dataFrame = new ArrayList<>();
     }
+
+    //getters and setters
 
     public String getSelectedMemoryPath() {
         return selectedMemoryPath;
@@ -24,5 +28,15 @@ public class DataFrame implements Serializable {
 
     public void setSourcePath(String sourcePath) {
         this.sourcePath = sourcePath;
+    }
+
+    //getters and setters
+
+    public int size(){
+        return dataFrame.size();
+    }
+
+    public void addRow(String original, String translation, int paragraphIndex) {
+        dataFrame.add(new Row(original, translation, paragraphIndex));
     }
 }
