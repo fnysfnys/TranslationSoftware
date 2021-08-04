@@ -1,4 +1,3 @@
-import javax.print.attribute.standard.OrientationRequested;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
@@ -7,7 +6,7 @@ import java.io.File;
 
 public class NewProjectFileSelection extends JFrame {
 
-    private Model model;
+    private projectLauncher projectLauncher;
 
     private JPanel newProjectFileSelectionPanel;
     private JPanel labelPanel;
@@ -26,7 +25,7 @@ public class NewProjectFileSelection extends JFrame {
         super("New Project");
         newProjectFileSelectionPanel = new JPanel(new BorderLayout());
 
-        model = ModelFactory.getModel();
+        projectLauncher projectLauncher = new projectLauncher();
 
         createNewProjectFileSelection();
         finalizeNewProjectFileSelection();
@@ -69,7 +68,7 @@ public class NewProjectFileSelection extends JFrame {
             File file = fc.getSelectedFile();
             String newMemoryFilePath = file.getPath();
             memoryPathLabel.setText("Memory File Path: " + newMemoryFilePath);
-            model.createMemory(newMemoryFilePath);
+            projectLauncher.createMemory(newMemoryFilePath);
             attemptLaunch();
         }
     }
@@ -84,7 +83,7 @@ public class NewProjectFileSelection extends JFrame {
             File file = fc.getSelectedFile();
             String filePath = file.getPath();
             sourcePathLabel.setText("Memory File Path: " + filePath);
-            model.setMemory(filePath);
+            projectLauncher.setMemory(filePath);
             attemptLaunch();
         }
     }
@@ -99,7 +98,7 @@ public class NewProjectFileSelection extends JFrame {
             File file = fc.getSelectedFile();
             String filePath = file.getPath();
             sourcePathLabel.setText("Source File Path: " + filePath);
-            model.getDocument(filePath);
+            projectLauncher.getDocument(filePath);
             attemptLaunch();
         }
     }
@@ -115,7 +114,7 @@ public class NewProjectFileSelection extends JFrame {
             File file = fc.getSelectedFile();
             projectPath = file.getPath();
             projectPathLabel.setText("Project Path: " + projectPath);
-            model.setProjectPath(projectPath);
+            projectLauncher.setProjectPath(projectPath);
             attemptLaunch();
         }
     }
@@ -141,7 +140,7 @@ public class NewProjectFileSelection extends JFrame {
     }
 
     private void attemptLaunch(){
-        if(model.readyToLaunch()){
+        if(projectLauncher.readyToLaunch()){
             JButton launchButton = new JButton("Launch");
             createMemoryButton.addActionListener((ActionEvent e) -> launch());
             newProjectFileSelectionPanel.add(launchButton, BorderLayout.SOUTH);
@@ -149,6 +148,7 @@ public class NewProjectFileSelection extends JFrame {
     }
 
     private void launch() {
+
     }
 
 }

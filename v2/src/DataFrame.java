@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DataFrame {
+public class DataFrame implements Serializable {
     private ArrayList<Translation> translations;
     private String selectedMemoryPath;
     private String sourcePath;

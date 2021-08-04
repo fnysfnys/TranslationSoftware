@@ -1,4 +1,6 @@
-public class Translation {
+import java.io.Serializable;
+
+public class Translation implements Serializable {
     private String original;
     private String translation;
 

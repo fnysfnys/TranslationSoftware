@@ -4,71 +4,41 @@ import java.io.*;
 
 public class Model {
     private String projectPath;
+
     private DataFrame dataFrame;
     private TranslationMemory translationMemory;
     private XWPFDocument document;
+
+    //GET FILES {
 
     public Model(){
         dataFrame = new DataFrame();
     }
 
-    //GET FILES {
+    public void setTranslationMemory(TranslationMemory translationMemory) {
+        this.translationMemory = translationMemory;
+    }
 
-    public void createMemory(String newMemoryFilePath) {
-        translationMemory = new TranslationMemory();
+    public void setSelectedMemoryPath(String newMemoryFilePath) {
         dataFrame.setSelectedMemoryPath(newMemoryFilePath);
     }
 
-
-    public void setMemory(String filePath) {
-        try{
-            loadMemory(filePath);
-        }
-        catch (Exception e){
-            //MUST HANDLE CORRUPTED FILE.
-            e.printStackTrace();
-        }
-        dataFrame.setSelectedMemoryPath(filePath);
+    public void setSourcePath(String sourcePath) {
+        dataFrame.setSourcePath(sourcePath);
     }
 
-    private void loadMemory(String filePath) throws IOException, ClassNotFoundException {
-        FileInputStream fis = new FileInputStream(filePath);
-        ObjectInputStream ois = new ObjectInputStream(fis);
-
-        this.translationMemory = (TranslationMemory) ois.readObject();
-
-        ois.close();
-    }
-
-    private void setSourceFilePath(String filePath) {
-        dataFrame.setSourcePath(filePath);
-    }
-
-    public boolean readyToLaunch(){
-        System.out.println(projectPath);
-        System.out.println(dataFrame.getSelectedMemoryPath());
-        System.out.println(this.document);
+    public boolean readyToLaunch() {
         return ((this.projectPath != null) &&
-                (dataFrame.getSelectedMemoryPath() != null) &&
-                (this.document != null));
+                (dataFrame.getSourcePath() != null) &&
+                (dataFrame.getSelectedMemoryPath() != null));
     }
 
-    public void getDocument(String filePath) {
-       setSourceFilePath(filePath);
-
-       DOCXReader docxReader = new DOCXReader(filePath);
-       try {
-           this.document = docxReader.getDocument();
-       }
-       catch (Exception exp){
-           exp.printStackTrace();
-           //MUST HANDLE IF CAN NOT READ DOCUMENT
-        }
+    public void setDocument(XWPFDocument document) {
+        this.document = document;
     }
 
-    public void setProjectPath(String projectPath){
+    public void setProjectPath(String projectPath) {
         this.projectPath = projectPath;
     }
-
     // } GET FILES
 }
