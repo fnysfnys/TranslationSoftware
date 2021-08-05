@@ -1,5 +1,6 @@
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
+import javax.swing.*;
 import java.io.*;
 
 public class Model {
@@ -41,6 +42,7 @@ public class Model {
     public void setProjectPath(String projectPath) {
         this.projectPath = projectPath;
     }
+
     // } GET FILES
 
     public void loadDocumentToFrame(){
@@ -49,6 +51,28 @@ public class Model {
     }
 
     public String[][] getTableData() {
+        int rowCount = dataFrame.size();
+        String[][] tableData = new String[rowCount][2];
+        Row currentRow;
+        for (int row = 0; row < rowCount; row++) {
+            currentRow = dataFrame.getRow(row);
+            tableData[row][0] = currentRow.getOriginal();
+            tableData[row][1] = currentRow.getTranslation();
+        }
+        return tableData;
+    }
 
+    public void autoSave(JTable translationTable) {
+        int rowCount = dataFrame.size();
+        String currentOriginal, currentTranslation;
+        Row currentRow;
+        for (int row = 0; row < rowCount; row++) {
+            currentOriginal = (String) translationTable.getValueAt(row, 0);
+            currentTranslation = (String) translationTable.getValueAt(row, 1);
+            currentRow = dataFrame.getRow(row);
+
+            currentRow.setTranslation(currentTranslation);
+            translationMemory.addTranslation(currentOriginal, currentTranslation);
+        }
     }
 }

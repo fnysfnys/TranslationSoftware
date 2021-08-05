@@ -128,6 +128,7 @@ public class NewProjectFileSelectionUI extends JFrame {
         sourcePathLabel = new JLabel("Source File Path: --");
         memoryPathLabel = new JLabel("Memory Path: --");
 
+
         labelPanel.add(projectPathLabel);
         labelPanel.add(sourcePathLabel);
         labelPanel.add(memoryPathLabel);

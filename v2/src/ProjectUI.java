@@ -32,7 +32,9 @@ public class ProjectUI extends JFrame {
     private void createTablePanel(){
         translationTablePanel = new JPanel();
         createTable();
-        translationTableScrollPane = new JScrollPane();
+        translationTableScrollPane = new JScrollPane(translationTable);
+        translationTablePanel.add(translationTableScrollPane);
+        this.add(translationTablePanel);
     }
 
     private void createTable() {
@@ -63,11 +65,10 @@ public class ProjectUI extends JFrame {
             @Override
             public void valueChanged(ListSelectionEvent event) {
                 if (translationTable.getSelectedRow() > -1) {
-                    //auto save
+                    model.autoSave(translationTable);
                 }
             }
         });
-
     }
 
     private void finalizeProjectUI() {

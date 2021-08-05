@@ -8,21 +8,32 @@ public class TranslationMemory implements Serializable {
         translationMemory = new HashMap<>();
     }
 
+    public void addTranslation(String original, String translation){
 
-    public void addTranslation(String fromString, String toString){
-        translationMemory.put(fromString, toString);
+        String originalWithoutNumbers = replaceNumsWithKey(original);
+
+        if(translationExists(original)){
+            updateTranslation(original, translation);
+        }else{
+            translationMemory.put(original, translation);
+        }
     }
 
-    public void updateTranslation(String fromString, String toString){
-        translationMemory.remove(fromString);
-        addTranslation(fromString, toString);
+    private String replaceNumsWithKey(String original) {
+        return original.replaceAll("(((\\+|-)?([0-9]+)(\\.[0-9]+)?)|((\\+|-)?\\.?[0-9]+))", "47959e21fa733a07fb9f31376ed25b418aaae516");
     }
 
-    public boolean translationExists(String fromString){
-        return translationMemory.containsKey(fromString);
+    private void updateTranslation(String original, String translation){
+        translationMemory.remove(original);
+        addTranslation(original, translation);
     }
 
-    public String getTranslation(String fromString){
-        return translationMemory.get(fromString);
+    private boolean translationExists(String original){
+        String originalWithoutNumbers = replaceNumsWithKey(original);
+        return translationMemory.containsKey(original);
+    }
+
+    public String getTranslation(String original){
+        return translationMemory.get(original);
     }
 }
