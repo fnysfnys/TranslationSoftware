@@ -2,18 +2,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
-public class projectLauncher {
+public class ProjectLauncher {
 
     private Model model;
 
-    public projectLauncher(){
+    public ProjectLauncher(){
         model = ModelFactory.getModel();
     }
-    public void createMemory(String newMemoryFilePath) {
-        model.setTranslationMemory(new TranslationMemory());
-        model.setSelectedMemoryPath(newMemoryFilePath);
-    }
-
 
     public void setMemory(String filePath) {
         try{

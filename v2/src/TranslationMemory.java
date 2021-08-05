@@ -2,10 +2,14 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public class TranslationMemory implements Serializable {
+
     private HashMap<String, String> translationMemory;
 
-    public TranslationMemory(){
+    private String direction;
+
+    public TranslationMemory(String direction){
         translationMemory = new HashMap<>();
+        this.direction = direction;
     }
 
     public void addTranslation(String original, String translation){

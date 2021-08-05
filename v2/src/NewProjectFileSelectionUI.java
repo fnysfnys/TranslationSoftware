@@ -6,7 +6,7 @@ import java.io.File;
 
 public class NewProjectFileSelectionUI extends JFrame {
 
-    private projectLauncher projectLauncher;
+    private ProjectLauncher projectLauncher;
 
     private JPanel newProjectFileSelectionPanel;
     private JPanel labelPanel;
@@ -19,7 +19,7 @@ public class NewProjectFileSelectionUI extends JFrame {
     private JButton getProjectPathButton;
     private JButton getSourceFileButton;
     private JButton selectMemoryButton;
-    private JButton createMemoryButton;
+
 
     public NewProjectFileSelectionUI(){
         super("New Project");
@@ -27,7 +27,7 @@ public class NewProjectFileSelectionUI extends JFrame {
 
         newProjectFileSelectionPanel = new JPanel(new BorderLayout());
 
-        projectLauncher = new projectLauncher();
+        projectLauncher = new ProjectLauncher();
 
         createNewProjectFileSelection();
         finalizeNewProjectFileSelection();
@@ -44,35 +44,16 @@ public class NewProjectFileSelectionUI extends JFrame {
         getProjectPathButton = new JButton("Set Project Name");
         getSourceFileButton = new JButton("Select Source File");
         selectMemoryButton = new JButton("Load Memory");
-        createMemoryButton = new JButton("Create New Memory");
 
         getProjectPathButton.addActionListener((ActionEvent e) -> getProjectPath());
         getSourceFileButton.addActionListener((ActionEvent e) -> getSourceFile());
         selectMemoryButton.addActionListener((ActionEvent e) -> selectMemory());
-        createMemoryButton.addActionListener((ActionEvent e) -> createMemory());
 
         buttonsPanel.add(getProjectPathButton);
         buttonsPanel.add(getSourceFileButton);
         buttonsPanel.add(selectMemoryButton);
-        buttonsPanel.add(createMemoryButton);
 
         newProjectFileSelectionPanel.add(buttonsPanel, BorderLayout.CENTER);
-    }
-
-    private void createMemory() {
-
-        JFileChooser fc = new JFileChooser(".");
-        fc.setAcceptAllFileFilterUsed(false);
-        FileNameExtensionFilter csvFilter = new FileNameExtensionFilter("TMP Files", "tmp");
-        fc.addChoosableFileFilter(csvFilter);
-        int returnVal = fc.showSaveDialog(this);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = fc.getSelectedFile();
-            String newMemoryFilePath = file.getPath();
-            memoryPathLabel.setText("Memory File Path: " + newMemoryFilePath);
-            projectLauncher.createMemory(newMemoryFilePath);
-            attemptLaunch();
-        }
     }
 
     private void selectMemory() {
@@ -128,10 +109,10 @@ public class NewProjectFileSelectionUI extends JFrame {
         sourcePathLabel = new JLabel("Source File Path: --");
         memoryPathLabel = new JLabel("Memory Path: --");
 
-
         labelPanel.add(projectPathLabel);
         labelPanel.add(sourcePathLabel);
         labelPanel.add(memoryPathLabel);
+
         newProjectFileSelectionPanel.add(labelPanel, BorderLayout.NORTH);
     }
 

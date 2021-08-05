@@ -43,6 +43,7 @@ public class Model {
         this.projectPath = projectPath;
     }
 
+
     // } GET FILES
 
     public void loadDocumentToFrame(){
@@ -75,4 +76,5 @@ public class Model {
             translationMemory.addTranslation(currentOriginal, currentTranslation);
         }
     }
+
 }
