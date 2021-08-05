@@ -24,7 +24,12 @@ public class TranslationMemory implements Serializable {
     }
 
     private String replaceNumsWithKey(String original) {
-        return original.replaceAll("(((\\+|-)?([0-9]+)(\\.[0-9]+)?)|((\\+|-)?\\.?[0-9]+))", "47959e21fa733a07fb9f31376ed25b418aaae516");
+        if(this.direction.equals("English -> Swedish")){
+            return original.replaceAll("(((\\+|-)?([0-9]+)(\\.[0-9]+)?)|((\\+|-)?\\.?[0-9]+))", "47959e21fa733a07fb9f31376ed25b418aaae516");
+        }
+        else{
+            //replace with swedish text
+        }
     }
 
     private void updateTranslation(String original, String translation){
