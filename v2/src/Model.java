@@ -64,16 +64,49 @@ public class Model {
     }
 
     public void autoSave(JTable translationTable) {
+        saveTableDataToObjects(translationTable);
+        try {
+            writeFrameToFile();
+            writeMemoryToFile();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            //handle files moved.
+        }
+        System.out.println("Auto Saved");
+    }
+
+    private void writeFrameToFile() throws IOException {
+        FileOutputStream fos = new FileOutputStream(this.projectPath);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+        oos.writeObject(dataFrame);
+
+        oos.close();
+    }
+
+    private void writeMemoryToFile() throws IOException {
+        FileOutputStream fos = new FileOutputStream(dataFrame.getSelectedMemoryPath());
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+        oos.writeObject(translationMemory);
+
+        oos.close();
+    }
+
+    private void saveTableDataToObjects(JTable translationTable) {
         int rowCount = dataFrame.size();
         String currentOriginal, currentTranslation;
         Row currentRow;
         for (int row = 0; row < rowCount; row++) {
             currentOriginal = (String) translationTable.getValueAt(row, 0);
             currentTranslation = (String) translationTable.getValueAt(row, 1);
-            currentRow = dataFrame.getRow(row);
 
-            currentRow.setTranslation(currentTranslation);
-            translationMemory.addTranslation(currentOriginal, currentTranslation);
+            if(!(currentTranslation.equals(""))) {
+                currentRow = dataFrame.getRow(row);
+                currentRow.setTranslation(currentTranslation);
+                translationMemory.addTranslation(currentOriginal, currentTranslation);
+            }
         }
     }
 

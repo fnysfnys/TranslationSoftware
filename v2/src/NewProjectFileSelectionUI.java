@@ -65,7 +65,7 @@ public class NewProjectFileSelectionUI extends JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fc.getSelectedFile();
             String filePath = file.getPath();
-            sourcePathLabel.setText("Memory File Path: " + filePath);
+            memoryPathLabel.setText("Memory File Path: " + filePath);
             projectLauncher.setMemory(filePath);
             attemptLaunch();
         }

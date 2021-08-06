@@ -1,5 +1,7 @@
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TranslationMemory implements Serializable {
 
@@ -23,10 +25,10 @@ public class TranslationMemory implements Serializable {
         String originalWithoutNumbers = removeNumbersFromOriginal(original);
         String translationWithoutNumbers = removeNumbersFromTranslation(translation);
 
-        if(translationExists(original)){
-            updateTranslation(original, translation);
+        if(translationExists(originalWithoutNumbers)){
+            updateTranslation(originalWithoutNumbers, translationWithoutNumbers);
         }else{
-            translationMemory.put(original, translation);
+            translationMemory.put(originalWithoutNumbers, translationWithoutNumbers);
         }
     }
 
@@ -41,7 +43,23 @@ public class TranslationMemory implements Serializable {
     }
 
     public String getTranslation(String original){
-        return translationMemory.get(original);
+        String originalWithoutNumbers = removeNumbersFromOriginal(original);
+        String translationWithoutNumbers = translationMemory.get(originalWithoutNumbers);
+        return translationWithNewNumbers(original, translationWithoutNumbers);
+    }
+
+    private String translationWithNewNumbers(String original, String translationWithoutNumbers) {
+        if(direction.equals("Swedish -> English")){
+            System.out.println(original);
+            Pattern pattern = Pattern.compile(NUMBER_KEY);
+            Matcher matcher = pattern.matcher(original);
+            if(matcher.find()) {
+                for (int i = 0; i < matcher.end(); i++) {
+                    System.out.println(matcher.group(i));
+                }
+            }
+        }
+        return translationWithoutNumbers;
     }
 
 

@@ -13,16 +13,21 @@ public class DataLoader {
         List<XWPFParagraph> paragraphs = document.getParagraphs();
         int paragraphIndex = 0;
         for(XWPFParagraph paragraph : paragraphs){
-            loadParagraphToFrame(dataFrame, paragraphIndex, paragraph);
+            loadParagraphToFrame(dataFrame, paragraphIndex, paragraph, translationMemory);
             paragraphIndex++;
         }
     }
 
-    private void loadParagraphToFrame(DataFrame dataFrame, int paragraphIndex, XWPFParagraph paragraph) {
+    private void loadParagraphToFrame(DataFrame dataFrame, int paragraphIndex, XWPFParagraph paragraph, TranslationMemory translationMemory) {
         String paragraphText = paragraph.getText();
         String[] sentences = paragraphText.split("\\. ");
         for (String sentence:sentences){
-            dataFrame.addRow(sentence, "", paragraphIndex);
+            if(translationMemory.translationExists(sentence)){
+                dataFrame.addRow(sentence, translationMemory.getTranslation(sentence), paragraphIndex);
+            }
+            else {
+                dataFrame.addRow(sentence, "", paragraphIndex);
+            }
         }
     }
 }
