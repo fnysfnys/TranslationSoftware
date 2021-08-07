@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,6 +15,10 @@ public class TranslationMemory implements Serializable {
     private static final String SWEDISH_NUMBER = "(([\\+|-]?([0-9][0-9][0-9][0-9]|[0-9][0-9][0-9]|[0-9][0-9]|[0-9])([ |\\.][0-9][0-9][0-9])*)([,][0-9]+)?)";
 
     private static final String ENGLISH_NUMBER = "(([\\+|-]?([0-9][0-9][0-9][0-9]|[0-9][0-9][0-9]|[0-9][0-9]|[0-9])([,][0-9][0-9][0-9])*)([.][0-9]+)?)";
+
+    private final Pattern SwedishNumberPattern = Pattern.compile(SWEDISH_NUMBER);
+
+    private final Pattern EnglishNumberPattern = Pattern.compile(ENGLISH_NUMBER);
 
     public TranslationMemory(String direction){
         translationMemory = new HashMap<>();
@@ -48,18 +53,29 @@ public class TranslationMemory implements Serializable {
         return translationWithNewNumbers(original, translationWithoutNumbers);
     }
 
-    private String translationWithNewNumbers(String original, String translationWithoutNumbers) {
+    private String translationWithNewNumbers(String original, String translation) {
+        Matcher matcher;
+
         if(direction.equals("Swedish -> English")){
-            System.out.println(original);
-            Pattern pattern = Pattern.compile(NUMBER_KEY);
-            Matcher matcher = pattern.matcher(original);
-            if(matcher.find()) {
-                for (int i = 0; i < matcher.end(); i++) {
-                    System.out.println(matcher.group(i));
-                }
-            }
+            matcher = SwedishNumberPattern.matcher(original);
         }
-        return translationWithoutNumbers;
+        else{
+            matcher = EnglishNumberPattern.matcher(original);
+        }
+
+        ArrayList<String> newNumbers = extractNumbers(matcher);
+
+        for(String newNumber : newNumbers){ translation = translation.replaceFirst(NUMBER_KEY, newNumber); }
+
+        return translation;
+    }
+
+    private ArrayList<String> extractNumbers(Matcher matcher) {
+        ArrayList<String> newNumbers = new ArrayList<>();
+        while(matcher.find()){
+            newNumbers.add(matcher.group());
+        }
+        return newNumbers;
     }
 
 
