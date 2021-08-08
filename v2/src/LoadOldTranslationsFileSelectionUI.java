@@ -4,28 +4,28 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
-public class NewProjectFileSelectionUI extends JFrame {
+public class LoadOldTranslationsFileSelectionUI extends JFrame {
 
     private NewProjectLauncher newProjectLauncher;
 
-    private JPanel newProjectFileSelectionPanel;
+    private JPanel loadOldTranslationsPanel;
     private JPanel labelPanel;
     private JPanel buttonsPanel;
 
-    private JLabel projectPathLabel;
-    private JLabel sourcePathLabel;
+    private JLabel originalPathLabel;
+    private JLabel translationPathLabel;
     private JLabel memoryPathLabel;
 
-    private JButton getProjectPathButton;
-    private JButton getSourceFileButton;
+    private JButton getOriginalFileButton;
+    private JButton getTranslationFileButton;
     private JButton selectMemoryButton;
 
 
-    public NewProjectFileSelectionUI(){
+    public LoadOldTranslationsFileSelectionUI(){
         super("New Project");
         this.setPreferredSize(new Dimension(650, 150));
 
-        newProjectFileSelectionPanel = new JPanel(new BorderLayout());
+        loadOldTranslationsPanel = new JPanel(new BorderLayout());
 
         newProjectLauncher = new NewProjectLauncher();
 
@@ -41,19 +41,19 @@ public class NewProjectFileSelectionUI extends JFrame {
     private void createButtons() {
         buttonsPanel = new JPanel();
 
-        getProjectPathButton = new JButton("Set Project Name");
-        getSourceFileButton = new JButton("Select Source File");
-        selectMemoryButton = new JButton("Load Memory");
+        getOriginalFileButton = new JButton("Select Original File");
+        getTranslationFileButton = new JButton("Select Translation File");
+        selectMemoryButton = new JButton("Select Memory");
 
-        getProjectPathButton.addActionListener((ActionEvent e) -> getProjectPath());
-        getSourceFileButton.addActionListener((ActionEvent e) -> getSourceFile());
+        getOriginalFileButton.addActionListener((ActionEvent e) -> getOriginalFile());
+        getTranslationFileButton.addActionListener((ActionEvent e) -> getTranslationFile());
         selectMemoryButton.addActionListener((ActionEvent e) -> selectMemory());
 
-        buttonsPanel.add(getProjectPathButton);
-        buttonsPanel.add(getSourceFileButton);
+        buttonsPanel.add(getOriginalFileButton);
+        buttonsPanel.add(getTranslationFileButton);
         buttonsPanel.add(selectMemoryButton);
 
-        newProjectFileSelectionPanel.add(buttonsPanel, BorderLayout.CENTER);
+        loadOldTranslationsPanel.add(buttonsPanel, BorderLayout.CENTER);
     }
 
     private void selectMemory() {
@@ -71,7 +71,7 @@ public class NewProjectFileSelectionUI extends JFrame {
         }
     }
 
-    private void getSourceFile() {
+    private void getOriginalFile() {
         JFileChooser fc = new JFileChooser(".");
         fc.setAcceptAllFileFilterUsed(false);
         FileNameExtensionFilter csvFilter = new FileNameExtensionFilter("DOCX Files", "docx");
@@ -80,13 +80,13 @@ public class NewProjectFileSelectionUI extends JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fc.getSelectedFile();
             String filePath = file.getPath();
-            sourcePathLabel.setText("Source File Path: " + filePath);
+            originalPathLabel.setText("Original File Path: " + filePath);
             newProjectLauncher.getDocument(filePath);
             attemptLaunch();
         }
     }
 
-    private void getProjectPath() {
+    private void getTranslationFile() {
         JFileChooser fc = new JFileChooser(".");
         fc.setAcceptAllFileFilterUsed(false);
         FileNameExtensionFilter csvFilter = new FileNameExtensionFilter("TMP Files", "tmp");
@@ -96,7 +96,7 @@ public class NewProjectFileSelectionUI extends JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fc.getSelectedFile();
             projectPath = file.getPath();
-            projectPathLabel.setText("Project Path: " + projectPath);
+            translationPathLabel.setText("Translation File Path: " + projectPath);
             newProjectLauncher.setProjectPath(projectPath);
             attemptLaunch();
         }
@@ -105,22 +105,22 @@ public class NewProjectFileSelectionUI extends JFrame {
     private void createLabels() {
         labelPanel = new JPanel();
         labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.Y_AXIS));
-        projectPathLabel = new JLabel("Project Path: --");
-        sourcePathLabel = new JLabel("Source File Path: --");
+        originalPathLabel = new JLabel("Original File Path: --");
+        translationPathLabel = new JLabel("Translation File Path: --");
         memoryPathLabel = new JLabel("Memory Path: --");
 
-        labelPanel.add(projectPathLabel);
-        labelPanel.add(sourcePathLabel);
+        labelPanel.add(originalPathLabel);
+        labelPanel.add(translationPathLabel);
         labelPanel.add(memoryPathLabel);
 
-        newProjectFileSelectionPanel.add(labelPanel, BorderLayout.NORTH);
+        loadOldTranslationsPanel.add(labelPanel, BorderLayout.NORTH);
     }
 
     private void attemptLaunch(){
         if(newProjectLauncher.readyToLaunch()){
             JButton launchButton = new JButton("Launch");
             launchButton.addActionListener((ActionEvent e) -> launch());
-            newProjectFileSelectionPanel.add(launchButton, BorderLayout.SOUTH);
+            loadOldTranslationsPanel.add(launchButton, BorderLayout.SOUTH);
         }
     }
 
@@ -130,7 +130,7 @@ public class NewProjectFileSelectionUI extends JFrame {
     }
 
     private void finalizeNewProjectFileSelection() {
-        this.add(newProjectFileSelectionPanel);
+        this.add(loadOldTranslationsPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setLocationRelativeTo(null);
