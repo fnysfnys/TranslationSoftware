@@ -248,7 +248,39 @@ public class GUI extends JFrame {
     }
 
     private void exportAsDocx() {
-        System.out.println("exported");
+        JFileChooser fc = new JFileChooser(".");
+        fc.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter csvFilter = new FileNameExtensionFilter("Word Documents", "docx");
+        fc.addChoosableFileFilter(csvFilter);
+        String filePathToSave;
+        int returnVal = fc.showSaveDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            filePathToSave = file.getPath();
+            ArrayList<String> translatedDoc = extractTranslatedDataFromTable();
+            try
+            {
+                model.exportAsDocx(filePathToSave, translatedDoc);
+            } catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private ArrayList<String> extractTranslatedDataFromTable()
+    {
+        ArrayList<String> translatedDoc = new ArrayList<>();
+        for (int i = 0; i < model.getRowCount(); i++)
+        {
+            String line = (String) dataTable.getValueAt(i,1);
+            if (line.equals(""))
+            {
+                line = (String) dataTable.getValueAt(i,0);
+            }
+            translatedDoc.add(line);
+        }
+        return translatedDoc;
     }
 
     private void createSaveAsMenu() {

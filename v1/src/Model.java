@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.io.*;
+import java.util.ArrayList;
 
 public class Model {
 
@@ -28,6 +29,10 @@ public class Model {
         }
 
         return data;
+    }
+
+    public int getRowCount() {
+        return dataFrame.getRowCount();
     }
 
     public boolean memoryLoaded(){
@@ -158,5 +163,11 @@ public class Model {
         catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void exportAsDocx(String filePath, ArrayList<String> translatedDoc) throws IOException
+    {
+        Exporter exp = new Exporter(filePath, translatedDoc);
+        exp.exportFile();
     }
 }
