@@ -2,6 +2,8 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 
 public class ProjectUI extends JFrame {
 
@@ -10,13 +12,14 @@ public class ProjectUI extends JFrame {
     private JPanel translationTablePanel;
     private JTable translationTable;
     private JScrollPane translationTableScrollPane;
+    private JMenuBar menuBar;
 
     private DefaultTableModel tableModel;
 
     private String[][] tableData;
 
     public ProjectUI(){
-        super("Row Project");
+        super("Smart Translate Project (AUTO SAVE: ON)");
 
         model = ModelFactory.getModel();
         model.loadDocumentToFrame();
@@ -26,14 +29,43 @@ public class ProjectUI extends JFrame {
     }
 
     private void createProjectUI() {
+        createMenu();
         createTablePanel();
     }
 
+    private void createMenu() {
+        menuBar = new JMenuBar();
+
+        JMenu fileMenu = new JMenu("File");
+
+        JMenuItem saveProjectItem = new JMenuItem("Save Project");
+        JMenuItem exportItem = new JMenuItem("Export Translation");
+
+        saveProjectItem.addActionListener((ActionEvent e) -> saveProject());
+        exportItem.addActionListener((ActionEvent e) -> exportTranslation());
+
+        fileMenu.add(saveProjectItem);
+        fileMenu.add(exportItem);
+
+        menuBar.add(fileMenu);
+
+        this.setJMenuBar(menuBar);
+    }
+
+    private void exportTranslation() {
+        System.out.println("EXPORTED");
+    }
+
+    private void saveProject() {
+        model.autoSave(translationTable);
+        System.out.println("Saved");
+    }
+
     private void createTablePanel(){
-        translationTablePanel = new JPanel();
+        translationTablePanel = new JPanel(new BorderLayout());
         createTable();
         translationTableScrollPane = new JScrollPane(translationTable);
-        translationTablePanel.add(translationTableScrollPane);
+        translationTablePanel.add(translationTableScrollPane, BorderLayout.CENTER);
         this.add(translationTablePanel);
     }
 
@@ -75,6 +107,7 @@ public class ProjectUI extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setLocationRelativeTo(null);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
     }
 }

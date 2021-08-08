@@ -43,6 +43,9 @@ public class Model {
         this.projectPath = projectPath;
     }
 
+    public void setDataFrame(DataFrame dataFrame) {
+        this.dataFrame = dataFrame;
+    }
 
     // } GET FILES
 

@@ -1,6 +1,8 @@
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.File;
 
 public class StartPageUI extends JFrame {
     private JPanel startPagePanel;
@@ -64,7 +66,19 @@ public class StartPageUI extends JFrame {
     }
 
     private void loadProject() {
-        System.out.println("load proj");
+        JFileChooser fc = new JFileChooser(".");
+        fc.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter csvFilter = new FileNameExtensionFilter("TMP Files", "tmp");
+        fc.addChoosableFileFilter(csvFilter);
+        int returnVal = fc.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            String filePath = file.getPath();
+            SavedProjectLauncher savedProjectLauncher = new SavedProjectLauncher();
+            savedProjectLauncher.LaunchSavedProject(filePath);
+            SwingUtilities.invokeLater(ProjectUI::new);
+            this.dispose();
+        }
     }
 
     private void loadFilesToMemory() {

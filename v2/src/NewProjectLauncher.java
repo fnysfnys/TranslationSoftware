@@ -2,11 +2,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
-public class ProjectLauncher {
+public class NewProjectLauncher {
 
     private Model model;
 
-    public ProjectLauncher(){
+    public NewProjectLauncher(){
         model = ModelFactory.getModel();
     }
 

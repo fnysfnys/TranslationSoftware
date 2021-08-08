@@ -10,4 +10,9 @@ public class ModelFactory
         }
         return model;
     }
+
+    public static Model getNewModel(){
+        model = new Model();
+        return model;
+    }
 }

@@ -6,7 +6,7 @@ import java.io.File;
 
 public class NewProjectFileSelectionUI extends JFrame {
 
-    private ProjectLauncher projectLauncher;
+    private NewProjectLauncher newProjectLauncher;
 
     private JPanel newProjectFileSelectionPanel;
     private JPanel labelPanel;
@@ -27,7 +27,7 @@ public class NewProjectFileSelectionUI extends JFrame {
 
         newProjectFileSelectionPanel = new JPanel(new BorderLayout());
 
-        projectLauncher = new ProjectLauncher();
+        newProjectLauncher = new NewProjectLauncher();
 
         createNewProjectFileSelection();
         finalizeNewProjectFileSelection();
@@ -66,7 +66,7 @@ public class NewProjectFileSelectionUI extends JFrame {
             File file = fc.getSelectedFile();
             String filePath = file.getPath();
             memoryPathLabel.setText("Memory File Path: " + filePath);
-            projectLauncher.setMemory(filePath);
+            newProjectLauncher.setMemory(filePath);
             attemptLaunch();
         }
     }
@@ -81,7 +81,7 @@ public class NewProjectFileSelectionUI extends JFrame {
             File file = fc.getSelectedFile();
             String filePath = file.getPath();
             sourcePathLabel.setText("Source File Path: " + filePath);
-            projectLauncher.getDocument(filePath);
+            newProjectLauncher.getDocument(filePath);
             attemptLaunch();
         }
     }
@@ -97,7 +97,7 @@ public class NewProjectFileSelectionUI extends JFrame {
             File file = fc.getSelectedFile();
             projectPath = file.getPath();
             projectPathLabel.setText("Project Path: " + projectPath);
-            projectLauncher.setProjectPath(projectPath);
+            newProjectLauncher.setProjectPath(projectPath);
             attemptLaunch();
         }
     }
@@ -117,7 +117,7 @@ public class NewProjectFileSelectionUI extends JFrame {
     }
 
     private void attemptLaunch(){
-        if(projectLauncher.readyToLaunch()){
+        if(newProjectLauncher.readyToLaunch()){
             JButton launchButton = new JButton("Launch");
             launchButton.addActionListener((ActionEvent e) -> launch());
             newProjectFileSelectionPanel.add(launchButton, BorderLayout.SOUTH);

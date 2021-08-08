@@ -8,7 +8,7 @@ public class TranslationMemory implements Serializable {
 
     private HashMap<String, String> translationMemory;
 
-    private String direction;
+    private final String direction;
 
     private static final String NUMBER_KEY = "53b0a1b2fadf4e040cdc2155a7340de24aca93cb";
 
