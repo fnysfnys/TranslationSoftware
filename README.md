@@ -10,7 +10,8 @@ open source translation software with translation memory (Work in progress)
 ## To Do:
 * Allow for old translations to be added to memory
 * Exporting with correct formatting (use runs)
-* try custom file types rather than tmp for serialized objects (.smrtt) (.tmem)
-* allow for translations to be recognised where dates have been changed, create regex for swedish and english date formats
+* Try custom file types rather than tmp for serialized objects (.smrtt) (.tmem)
+* Allow for translations to be recognised where dates have been changed, create regex for swedish and english date formats
+* Handle dependancies with Maven rather than manually
 
 
