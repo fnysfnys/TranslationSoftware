@@ -82,7 +82,7 @@ public class StartPageUI extends JFrame {
     }
 
     private void loadFilesToMemory() {
-        SwingUtilities.invokeLater(LoadOldTranslationsFileSelectionUI::new);
+        SwingUtilities.invokeLater(OldTranslationsFileSelectionUI::new);
     }
 
     private void finalizeStartPage() {

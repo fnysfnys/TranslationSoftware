@@ -4,9 +4,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
-public class LoadOldTranslationsFileSelectionUI extends JFrame {
+public class OldTranslationsFileSelectionUI extends JFrame {
 
-    private NewProjectLauncher newProjectLauncher;
+    private OldTranslationsLauncher oldTranslationsLauncher;
 
     private JPanel loadOldTranslationsPanel;
     private JPanel labelPanel;
@@ -21,13 +21,13 @@ public class LoadOldTranslationsFileSelectionUI extends JFrame {
     private JButton selectMemoryButton;
 
 
-    public LoadOldTranslationsFileSelectionUI(){
+    public OldTranslationsFileSelectionUI(){
         super("New Project");
         this.setPreferredSize(new Dimension(650, 150));
 
         loadOldTranslationsPanel = new JPanel(new BorderLayout());
 
-        newProjectLauncher = new NewProjectLauncher();
+        oldTranslationsLauncher = new OldTranslationsLauncher();
 
         createNewProjectFileSelection();
         finalizeNewProjectFileSelection();
@@ -66,7 +66,7 @@ public class LoadOldTranslationsFileSelectionUI extends JFrame {
             File file = fc.getSelectedFile();
             String filePath = file.getPath();
             memoryPathLabel.setText("Memory File Path: " + filePath);
-            newProjectLauncher.setMemory(filePath);
+            oldTranslationsLauncher.setMemory(filePath);
             attemptLaunch();
         }
     }
@@ -81,7 +81,7 @@ public class LoadOldTranslationsFileSelectionUI extends JFrame {
             File file = fc.getSelectedFile();
             String filePath = file.getPath();
             originalPathLabel.setText("Original File Path: " + filePath);
-            newProjectLauncher.getDocument(filePath);
+            oldTranslationsLauncher.serOriginalDocument(filePath);
             attemptLaunch();
         }
     }
@@ -89,15 +89,14 @@ public class LoadOldTranslationsFileSelectionUI extends JFrame {
     private void getTranslationFile() {
         JFileChooser fc = new JFileChooser(".");
         fc.setAcceptAllFileFilterUsed(false);
-        FileNameExtensionFilter csvFilter = new FileNameExtensionFilter("TMP Files", "tmp");
+        FileNameExtensionFilter csvFilter = new FileNameExtensionFilter("DOCX Files", "docx");
         fc.addChoosableFileFilter(csvFilter);
-        String projectPath;
-        int returnVal = fc.showSaveDialog(this);
+        int returnVal = fc.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fc.getSelectedFile();
-            projectPath = file.getPath();
+            String projectPath = file.getPath();
             translationPathLabel.setText("Translation File Path: " + projectPath);
-            newProjectLauncher.setProjectPath(projectPath);
+            oldTranslationsLauncher.setTranslatedDocument(projectPath);
             attemptLaunch();
         }
     }
@@ -117,7 +116,7 @@ public class LoadOldTranslationsFileSelectionUI extends JFrame {
     }
 
     private void attemptLaunch(){
-        if(newProjectLauncher.readyToLaunch()){
+        if(oldTranslationsLauncher.readyToLaunch()){
             JButton launchButton = new JButton("Launch");
             launchButton.addActionListener((ActionEvent e) -> launch());
             loadOldTranslationsPanel.add(launchButton, BorderLayout.SOUTH);
@@ -125,7 +124,7 @@ public class LoadOldTranslationsFileSelectionUI extends JFrame {
     }
 
     private void launch() {
-        SwingUtilities.invokeLater(ProjectUI::new);
+        SwingUtilities.invokeLater(OldTranslationsUI::new);
         this.dispose();
     }
 
