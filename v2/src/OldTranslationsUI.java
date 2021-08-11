@@ -35,18 +35,63 @@ public class OldTranslationsUI extends JFrame {
     private void createMenu() {
         menuBar = new JMenuBar();
 
-        JMenu fileMenu = new JMenu("File");
-
         JMenuItem saveTranslationsToMemoryItem = new JMenuItem("Save Translations To Memory");
 
         saveTranslationsToMemoryItem.addActionListener((ActionEvent e) -> saveTranslationsToMemory());
 
         menuBar.add(saveTranslationsToMemoryItem);
 
+        createAlignmentMenu();
+
         this.setJMenuBar(menuBar);
     }
 
+    private void createAlignmentMenu() {
+        JMenu alignMenu = new JMenu("Align...");
+
+        JMenuItem deleteOriginalItem = new JMenuItem("Delete Original From Selected Row");
+        JMenuItem deleteTranslatedItem = new JMenuItem("Delete Translation From Selected Row");
+
+        deleteOriginalItem.addActionListener((ActionEvent e) -> deleteOriginalFromSelectedRow());
+        deleteTranslatedItem.addActionListener((ActionEvent e) -> deleteTranslatedFromSelectedRow());
+
+        alignMenu.add(deleteOriginalItem);
+        alignMenu.add(deleteTranslatedItem);
+
+        menuBar.add(alignMenu);
+
+    }
+
+    private void deleteTranslatedFromSelectedRow() {
+        model.updateFrame(translationTable);
+        model.deleteTranslatedFromRow(translationTable.getSelectedRow());
+        this.tableData = model.getTableData();
+        updateTable();
+    }
+
+    private void deleteOriginalFromSelectedRow() {
+        model.updateFrame(translationTable);
+        model.deleteOriginalFromRow(translationTable.getSelectedRow());
+        this.tableData = model.getTableData();
+        updateTable();
+    }
+
+    private void updateTable() {
+        translationTablePanel.remove(translationTableScrollPane);
+        createTable();
+        translationTableScrollPane = new JScrollPane(translationTable);
+        translationTablePanel.add(translationTableScrollPane, BorderLayout.CENTER);
+
+        translationTablePanel.revalidate();
+        translationTablePanel.validate();
+        translationTablePanel.repaint();
+    }
+
+
     private void saveTranslationsToMemory() {
+        model.saveTranslationsToMemory(translationTable);
+        JOptionPane.showMessageDialog(this, "This translation has been saved to your selected memory file.", "Success!", JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();
     }
 
     private void createTablePanel(){

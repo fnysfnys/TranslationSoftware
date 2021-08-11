@@ -68,7 +68,7 @@ public class StartPageUI extends JFrame {
     private void loadProject() {
         JFileChooser fc = new JFileChooser(".");
         fc.setAcceptAllFileFilterUsed(false);
-        FileNameExtensionFilter csvFilter = new FileNameExtensionFilter("TMP Files", "tmp");
+        FileNameExtensionFilter csvFilter = new FileNameExtensionFilter("Smart Translate Projects", "smartt");
         fc.addChoosableFileFilter(csvFilter);
         int returnVal = fc.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {

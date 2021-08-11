@@ -48,10 +48,14 @@ public class OldTranslationsDataLoader {
     private ArrayList<String> loadDocumentToList(XWPFDocument document) {
         ArrayList<String> documentSentences = new ArrayList<>();
         List<XWPFParagraph> paragraphs = document.getParagraphs();
-        for(XWPFParagraph paragraph : paragraphs){
+        for(XWPFParagraph paragraph : paragraphs) {
             String paragraphText = paragraph.getText();
             String[] paragraphSentences = paragraphText.split("\\. ");
-            documentSentences.addAll(Arrays.asList(paragraphSentences));
+            for (String sentence : paragraphSentences){
+                if(!sentence.equals("") && !sentence.equals(" ")){
+                    documentSentences.add(sentence);
+                }
+            }
         }
         return documentSentences;
     }

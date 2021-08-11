@@ -59,7 +59,7 @@ public class OldTranslationsFileSelectionUI extends JFrame {
     private void selectMemory() {
         JFileChooser fc = new JFileChooser(".");
         fc.setAcceptAllFileFilterUsed(false);
-        FileNameExtensionFilter csvFilter = new FileNameExtensionFilter("TMP Files", "tmp");
+        FileNameExtensionFilter csvFilter = new FileNameExtensionFilter("Translation Memory Files", "tmem");
         fc.addChoosableFileFilter(csvFilter);
         int returnVal = fc.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {

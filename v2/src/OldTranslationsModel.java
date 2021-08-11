@@ -1,5 +1,7 @@
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
+import javax.swing.*;
+
 public class OldTranslationsModel {
     private XWPFDocument originalDocument;
     private XWPFDocument translatedDocument;
@@ -44,5 +46,47 @@ public class OldTranslationsModel {
             tableData[row][1] = currentRow.getTranslation();
         }
         return tableData;
+    }
+
+    public void saveTranslationsToMemory(JTable translationTable) {
+        getTableState(translationTable);
+        getTranslationsFromFrame();
+    }
+
+    private void getTranslationsFromFrame() {
+        int rowCount = dataFrame.size();
+        Row currentRow;
+        for (int row = 0; row < rowCount; row++) {
+            currentRow = dataFrame.getRow(row);
+            translationMemory.addTranslation(currentRow.getOriginal(), currentRow.getTranslation());
+        }
+    }
+
+    private void getTableState(JTable translationTable) {
+        int rowCount = translationTable.getRowCount();
+        Row currentRow;
+        for (int row = 0; row < rowCount; row++) {
+            currentRow = dataFrame.getRow(row);
+            currentRow.setOriginal((String) translationTable.getValueAt(row, 0));
+            currentRow.setTranslation((String) translationTable.getValueAt(row, 1));
+        }
+    }
+
+    public void updateFrame(JTable translationTable) {
+        int rowCount = dataFrame.size();
+        Row currentRow;
+        for (int row = 0; row < rowCount; row++) {
+            currentRow = dataFrame.getRow(row);
+            currentRow.setOriginal((String) translationTable.getValueAt(row, 0));
+            currentRow.setTranslation((String) translationTable.getValueAt(row, 1));
+        }
+    }
+
+    public void deleteOriginalFromRow(int selectedRow) {
+        dataFrame.deleteOriginalFromRow(selectedRow);
+    }
+
+    public void deleteTranslatedFromRow(int selectedRow) {
+        dataFrame.deleteTranslationFromRow(selectedRow);
     }
 }
