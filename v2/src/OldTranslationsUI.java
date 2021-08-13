@@ -49,17 +49,40 @@ public class OldTranslationsUI extends JFrame {
     private void createAlignmentMenu() {
         JMenu alignMenu = new JMenu("Align...");
 
-        JMenuItem deleteOriginalItem = new JMenuItem("Delete Original From Selected Row");
-        JMenuItem deleteTranslatedItem = new JMenuItem("Delete Translation From Selected Row");
+        JMenuItem deleteOriginalItem = new JMenuItem("Delete Original Column From Selected Row");
+        JMenuItem deleteTranslatedItem = new JMenuItem("Delete Translation Column From Selected Row");
+
+        JMenuItem insertBlankOriginalItem = new JMenuItem("Insert Blank Original at Selected Row");
+        JMenuItem insertBlankTranslationItem = new JMenuItem("Insert Blank Translation at Selected Row");
 
         deleteOriginalItem.addActionListener((ActionEvent e) -> deleteOriginalFromSelectedRow());
         deleteTranslatedItem.addActionListener((ActionEvent e) -> deleteTranslatedFromSelectedRow());
 
+        insertBlankOriginalItem.addActionListener((ActionEvent e) -> insertBlankOriginal());
+        insertBlankTranslationItem.addActionListener((ActionEvent e) -> insertBlankTranslation());
+
         alignMenu.add(deleteOriginalItem);
         alignMenu.add(deleteTranslatedItem);
 
+        alignMenu.add(insertBlankOriginalItem);
+        alignMenu.add(insertBlankTranslationItem);
+
         menuBar.add(alignMenu);
 
+    }
+
+    private void insertBlankTranslation() {
+        model.updateFrame(translationTable);
+        model.insertBlankTranslation(translationTable.getSelectedRow());
+        this.tableData = model.getTableData();
+        updateTable();
+    }
+
+    private void insertBlankOriginal() {
+        model.updateFrame(translationTable);
+        model.insertBlankOriginal(translationTable.getSelectedRow());
+        this.tableData = model.getTableData();
+        updateTable();
     }
 
     private void deleteTranslatedFromSelectedRow() {

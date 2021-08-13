@@ -89,4 +89,12 @@ public class OldTranslationsModel {
     public void deleteTranslatedFromRow(int selectedRow) {
         dataFrame.deleteTranslationFromRow(selectedRow);
     }
+
+    public void insertBlankTranslation(int selectedRow) {
+        dataFrame.insertBlankTranslation(selectedRow);
+    }
+
+    public void insertBlankOriginal(int selectedRow) {
+        dataFrame.insertBlankOriginal(selectedRow);
+    }
 }

@@ -3,7 +3,7 @@ import java.io.Serializable;
 public class Row implements Serializable {
     private String original;
     private String translation;
-    private int paragraphIndex;
+    private final int paragraphIndex;
 
     public Row(String original, String translation, int paragraphIndex){
         this.original = original;

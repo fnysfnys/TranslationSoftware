@@ -65,6 +65,29 @@ public class DataFrame implements Serializable {
     }
 
 
+    public void insertBlankTranslation(int selectedRow) {
+        Row currentRow;
+        String prevTranslation = getRow(selectedRow).getTranslation();
+        String currentTranslation = "";
+        getRow(selectedRow).setTranslation("");
+        for (int row = selectedRow + 1; row < size(); row++) {
+            currentRow = getRow(row);
+            currentTranslation = currentRow.getTranslation();
+            currentRow.setTranslation(prevTranslation);
+            prevTranslation = currentTranslation;
+        }
+    }
 
-
+    public void insertBlankOriginal(int selectedRow) {
+        Row currentRow;
+        String prevOriginal = getRow(selectedRow).getOriginal();
+        String currentOriginal = "";
+        getRow(selectedRow).setOriginal("");
+        for (int row = selectedRow + 1; row < size(); row++) {
+            currentRow = getRow(row);
+            currentOriginal = currentRow.getOriginal();
+            currentRow.setOriginal(prevOriginal);
+            prevOriginal = currentOriginal;
+        }
+    }
 }
