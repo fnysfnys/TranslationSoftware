@@ -113,4 +113,8 @@ public class Model {
         }
     }
 
+    public void exportTranslation(String filePath) {
+        DOCXExporter docxExporter = new DOCXExporter(this.document, this.dataFrame);
+        docxExporter.exportTranslation(filePath);
+    }
 }

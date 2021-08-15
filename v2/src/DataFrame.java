@@ -1,5 +1,5 @@
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.*;
 
 public class DataFrame implements Serializable {
 
@@ -68,7 +68,7 @@ public class DataFrame implements Serializable {
     public void insertBlankTranslation(int selectedRow) {
         Row currentRow;
         String prevTranslation = getRow(selectedRow).getTranslation();
-        String currentTranslation = "";
+        String currentTranslation;
         getRow(selectedRow).setTranslation("");
         for (int row = selectedRow + 1; row < size(); row++) {
             currentRow = getRow(row);
@@ -81,13 +81,47 @@ public class DataFrame implements Serializable {
     public void insertBlankOriginal(int selectedRow) {
         Row currentRow;
         String prevOriginal = getRow(selectedRow).getOriginal();
-        String currentOriginal = "";
+        String currentOriginal;
         getRow(selectedRow).setOriginal("");
         for (int row = selectedRow + 1; row < size(); row++) {
             currentRow = getRow(row);
             currentOriginal = currentRow.getOriginal();
             currentRow.setOriginal(prevOriginal);
             prevOriginal = currentOriginal;
+        }
+    }
+
+    // } functions for loading old translations
+
+    // Functions for exporting
+
+    public List<String> getTranslatedParagraphs() {
+        ArrayList<String> translatedParagraphs = new ArrayList<>();
+        StringBuilder currentParagraph = new StringBuilder();
+        String currentSentence;
+        int currentParagraphIndex = 0;
+        Row currentRow;
+        for (int row = 0; row < size(); row++) {
+            currentRow = getRow(row);
+            currentSentence = getCurrentSentence(currentRow);
+            if(currentParagraphIndex == currentRow.getParagraphIndex()){
+                currentParagraph.append(currentSentence + ". ");
+            }
+            else{
+                translatedParagraphs.add(currentParagraph.toString());
+                currentParagraph = new StringBuilder();
+                currentParagraphIndex++;
+            }
+        }
+        return translatedParagraphs;
+    }
+
+    private String getCurrentSentence(Row currentRow) {
+        if(currentRow.getTranslation().equals("")){
+            return currentRow.getOriginal();
+        }
+        else {
+            return currentRow.getTranslation();
         }
     }
 }

@@ -1,9 +1,11 @@
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.File;
 
 public class ProjectUI extends JFrame {
 
@@ -53,7 +55,18 @@ public class ProjectUI extends JFrame {
     }
 
     private void exportTranslation() {
-        System.out.println("EXPORTED");
+        model.autoSave(translationTable);
+        JFileChooser fc = new JFileChooser(".");
+        fc.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter csvFilter = new FileNameExtensionFilter("DOCX Word File", "docx");
+        fc.addChoosableFileFilter(csvFilter);
+        String filePath;
+        int returnVal = fc.showSaveDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            filePath = file.getPath();
+            model.exportTranslation(filePath);
+        }
     }
 
     private void saveProject() {
