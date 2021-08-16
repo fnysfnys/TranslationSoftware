@@ -96,32 +96,29 @@ public class DataFrame implements Serializable {
     // Functions for exporting
 
     public List<String> getTranslatedParagraphs() {
-        ArrayList<String> translatedParagraphs = new ArrayList<>();
-        StringBuilder currentParagraph = new StringBuilder();
-        String currentSentence;
-        int currentParagraphIndex = 0;
-        Row currentRow;
-        for (int row = 0; row < size(); row++) {
-            currentRow = getRow(row);
-            currentSentence = getCurrentSentence(currentRow);
-            if(currentParagraphIndex == currentRow.getParagraphIndex()){
-                currentParagraph.append(currentSentence + ". ");
-            }
-            else{
-                translatedParagraphs.add(currentParagraph.toString());
-                currentParagraph = new StringBuilder();
-                currentParagraphIndex++;
-            }
+        ArrayList<String> paragraphs = new ArrayList<>();
+        for (int paragraphIndex = 0; paragraphIndex < getRow(size()-1).getParagraphIndex(); paragraphIndex++) {
+            paragraphs.add(getParagraph(paragraphIndex));
         }
-        return translatedParagraphs;
+        return paragraphs;
     }
 
-    private String getCurrentSentence(Row currentRow) {
-        if(currentRow.getTranslation().equals("")){
-            return currentRow.getOriginal();
+    private String getParagraph(int paragraphIndex) {
+        Row currentRow;
+        StringBuilder paragraph = new StringBuilder();
+        for (int i = 0; i < size(); i++) {
+            currentRow = getRow(i);
+            if(currentRow.getParagraphIndex() == paragraphIndex){
+                if(currentRow.getTranslation().equals("")){
+                    paragraph.append(currentRow.getOriginal());
+                }
+                else{
+                    paragraph.append(currentRow.getTranslation());
+                }
+            }
         }
-        else {
-            return currentRow.getTranslation();
-        }
+        return paragraph.toString();
     }
+
+
 }

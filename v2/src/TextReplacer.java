@@ -1,5 +1,6 @@
 
 import java.io.FileOutputStream;
+import java.sql.SQLOutput;
 import java.util.List;
 
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -33,14 +34,28 @@ public class TextReplacer {
 
         List<String> newParagraphs = dataFrame.getTranslatedParagraphs();
 
+        for (int i = 0; i < dataFrame.size(); i++) {
+            System.out.println("DataFrame original sentence: " + dataFrame.getRow(i).getOriginal());
+            System.out.println("DataFrame translated sentence: " + dataFrame.getRow(i).getTranslation());
+            System.out.println("Paragraph Index: " + dataFrame.getRow(i).getParagraphIndex());
+        }
+
+        for (int i = 0; i < newParagraphs.size(); i++) {
+            System.out.println("new paragraph: " + newParagraphs.get(i));
+        }
+//
+//        System.out.println("new paragraphs size: " + newParagraphs.size());
+//        System.out.println("old paragraphs size: " + paragraphsToReplace.size());
+
         for (int i = 0; i < Math.min(newParagraphs.size(), paragraphsToReplace.size()); i++) {
             replaceParagraph(paragraphsToReplace.get(i), newParagraphs.get(i));
         }
 
         FileOutputStream fo;
         try {
-            fo = new FileOutputStream("/Users/gabrielturner/OneDrive - University College London/Summer Projects/translationSoftware/v2/exported.docx");
+            fo = new FileOutputStream("/Users/gabrielturner/OneDrive - University College London/Summer Projects/translationSoftware/v2/exported2.docx");
             newDocument.write(fo);
+            System.out.println("DONE");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -51,6 +66,7 @@ public class TextReplacer {
         if(runs.size() > 0) {
             String font = runs.get(0).getFontFamily();
             int fontSize = runs.get(0).getFontSize();
+            //System.out.println(fontSize);
             boolean isBold = runs.get(0).isBold();
 
             int size = oldParagraph.getRuns().size();
@@ -59,12 +75,15 @@ public class TextReplacer {
             }
 
             String[] replacementTextSplitOnCarriageReturn = newParagraph.split("\n");
+
             for (int j = 0; j < replacementTextSplitOnCarriageReturn.length; j++) {
                 String part = replacementTextSplitOnCarriageReturn[j];
 
                 XWPFRun newRun = oldParagraph.insertNewRun(j);
                 newRun.setFontFamily(font);
-                newRun.setFontSize(fontSize);
+                if(fontSize!=-1) {
+                    newRun.setFontSize(fontSize);
+                }
                 newRun.setText(part);
                 newRun.setBold(isBold);
 

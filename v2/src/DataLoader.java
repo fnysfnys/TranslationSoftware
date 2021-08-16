@@ -21,7 +21,7 @@ public class DataLoader {
 
     private void loadParagraphToFrame(DataFrame dataFrame, int paragraphIndex, XWPFParagraph paragraph, TranslationMemory translationMemory) {
         String paragraphText = paragraph.getText();
-        String[] sentences = paragraphText.split("\\. ");
+        String[] sentences = paragraphText.split("((?=\\.))");
         for (String sentence:sentences){
             if(translationMemory.translationExists(sentence)){
                 dataFrame.addRow(sentence, translationMemory.getTranslation(sentence), paragraphIndex);
