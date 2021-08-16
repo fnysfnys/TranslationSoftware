@@ -17,18 +17,50 @@ public class DOCXExporter {
 
     public void exportTranslation(String filePath){
         XWPFDocument newDocument = originalDocument;
-
-        List<XWPFParagraph> originalParagraphs = newDocument.getParagraphs();
+        List<XWPFParagraph> paragraphsToReplace = newDocument.getParagraphs();
         List<String> newParagraphs = dataFrame.getTranslatedParagraphs();
 
-
-        for (int i = 0; i < newParagraphs.size(); i++) {
-            replaceParagraphText(originalParagraphs.get(i), newParagraphs.get(i));
+        for (int i = 0; i < Math.min(newParagraphs.size(), paragraphsToReplace.size()); i++) {
+            replaceParagraph(paragraphsToReplace.get(i), newParagraphs.get(i));
         }
 
+        write(filePath, newDocument);
+    }
 
+    private static void replaceParagraph(XWPFParagraph oldParagraph, String newParagraph) {
+        List<XWPFRun> runs = oldParagraph.getRuns();
+        if(runs.size() > 0) {
+            String font = runs.get(0).getFontFamily();
+            int fontSize = runs.get(0).getFontSize();
+            boolean isBold = runs.get(0).isBold();
 
+            int size = oldParagraph.getRuns().size();
 
+            for (int i = 0; i < size; i++) {
+                oldParagraph.removeRun(0);
+            }
+
+            String[] replacementTextSplitOnCarriageReturn = newParagraph.split("\n");
+
+            for (int j = 0; j < replacementTextSplitOnCarriageReturn.length; j++) {
+                String part = replacementTextSplitOnCarriageReturn[j];
+
+                XWPFRun newRun = oldParagraph.insertNewRun(j);
+                newRun.setFontFamily(font);
+                if(fontSize!=-1) {
+                    newRun.setFontSize(fontSize);
+                }
+                newRun.setText(part);
+                newRun.setBold(isBold);
+
+                if (j + 1 < replacementTextSplitOnCarriageReturn.length) {
+                    newRun.addCarriageReturn();
+                }
+            }
+        }
+    }
+
+    private void write(String filePath, XWPFDocument newDocument) {
         FileOutputStream fo;
         try {
             fo = new FileOutputStream(filePath);
@@ -38,31 +70,5 @@ public class DOCXExporter {
         }
     }
 
-    private void replaceParagraphText(XWPFParagraph originalParagraph, String newParagraphText) {
-        List<XWPFRun> runs = originalParagraph.getRuns();
-        removeAllRuns(originalParagraph);
-        insertReplacementRuns(originalParagraph, newParagraphText);
-    }
 
-    private void insertReplacementRuns(XWPFParagraph paragraph, String replacedText) {
-        String[] replacementTextSplitOnCarriageReturn = replacedText.split("\n");
-        System.out.println(replacementTextSplitOnCarriageReturn.length);
-        for (int j = 0; j < replacementTextSplitOnCarriageReturn.length; j++) {
-            String part = replacementTextSplitOnCarriageReturn[j];
-
-            XWPFRun newRun = paragraph.insertNewRun(j);
-            newRun.setText(part);
-
-            if (j + 1 < replacementTextSplitOnCarriageReturn.length) {
-                newRun.addCarriageReturn();
-            }
-        }
-    }
-
-    private void removeAllRuns(XWPFParagraph paragraph) {
-        int size = paragraph.getRuns().size();
-        for (int i = 0; i < size; i++) {
-            paragraph.removeRun(0);
-        }
-    }
 }

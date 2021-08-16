@@ -48,7 +48,7 @@ public class OldTranslationsLauncher {
 
         ois.close();
 
-        model.setTranslationMemory(translationMemory);
+        model.setTranslationMemory(filePath, translationMemory);
     }
 
     public boolean readyToLaunch() {

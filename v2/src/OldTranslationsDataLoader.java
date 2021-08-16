@@ -50,9 +50,10 @@ public class OldTranslationsDataLoader {
         List<XWPFParagraph> paragraphs = document.getParagraphs();
         for(XWPFParagraph paragraph : paragraphs) {
             String paragraphText = paragraph.getText();
-            String[] paragraphSentences = paragraphText.split("\\. ");
+            String[] paragraphSentences = paragraphText.split("((?<=\\. ))");
             for (String sentence : paragraphSentences){
-                if(!sentence.equals("") && !sentence.equals(" ")){
+                if(!sentence.equals("") && !sentence.equals(" ") && !sentence.equals("\u00a0")){
+                    System.out.println("Sentence added: " + sentence);
                     documentSentences.add(sentence);
                 }
             }

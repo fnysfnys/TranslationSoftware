@@ -1,12 +1,17 @@
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 import javax.swing.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 public class OldTranslationsModel {
     private XWPFDocument originalDocument;
     private XWPFDocument translatedDocument;
 
     private TranslationMemory translationMemory;
+    private String memoryFilePath;
+
     private DataFrame dataFrame;
 
     public OldTranslationsModel(){
@@ -21,7 +26,8 @@ public class OldTranslationsModel {
         this.translatedDocument = translatedDocument;
     }
 
-    public void setTranslationMemory(TranslationMemory translationMemory) {
+    public void setTranslationMemory(String memoryFilePath, TranslationMemory translationMemory) {
+        this.memoryFilePath = memoryFilePath;
         this.translationMemory = translationMemory;
     }
 
@@ -51,6 +57,22 @@ public class OldTranslationsModel {
     public void saveTranslationsToMemory(JTable translationTable) {
         getTableState(translationTable);
         getTranslationsFromFrame();
+
+        try{
+            writeMemoryToFile();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void writeMemoryToFile() throws IOException {
+        FileOutputStream fos = new FileOutputStream(memoryFilePath);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+        oos.writeObject(translationMemory);
+
+        oos.close();
     }
 
     private void getTranslationsFromFrame() {
