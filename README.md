@@ -16,7 +16,7 @@ open source translation software with translation memory (Work in progress)
 * Check for if you can auto translate fragments of a sentence
 * Auto translate if only one word has changed
 * Implement fuzzy matching with levenstein distance
-* check for string numbers e.g. (ett, två, etc.)
-* fix bug where numbers arent found and hash stays when taken from memory
+* ~~check for string numbers e.g. (ett, två, etc.)~~
+* ~~fix bug where numbers arent found and hash stays when taken from memory~~
 
 
