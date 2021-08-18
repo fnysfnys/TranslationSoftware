@@ -42,7 +42,7 @@ public class OldTranslationsFileSelectionUI extends JFrame {
         buttonsPanel = new JPanel();
 
         getOriginalFileButton = new JButton("Select Original File");
-        getTranslationFileButton = new JButton("Select Translation File");
+        getTranslationFileButton = new JButton("Select Translated File");
         selectMemoryButton = new JButton("Select Memory");
 
         getOriginalFileButton.addActionListener((ActionEvent e) -> getOriginalFile());
