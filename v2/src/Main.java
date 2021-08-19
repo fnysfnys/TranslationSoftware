@@ -1,8 +1,9 @@
 import javax.swing.*;
 
+
 public class Main {
     public static void main(final String[] args)
     {
-        SwingUtilities.invokeLater(StartPage::new);
+        SwingUtilities.invokeLater(StartPageUI::new);
     }
 }
