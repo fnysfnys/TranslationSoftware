@@ -41,7 +41,7 @@ public class OldTranslationsDataLoader {
                 currentTranslatedSentence = "";
             }
 
-            dataFrame.addRow(currentOriginalSentence, currentTranslatedSentence, -1);
+            dataFrame.addRow(currentOriginalSentence, "100%", currentTranslatedSentence, -1);
         }
     }
 

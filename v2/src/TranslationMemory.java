@@ -1,6 +1,8 @@
 import java.io.Serializable;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,9 +32,6 @@ public class TranslationMemory implements Serializable {
 
             String originalWithoutNumbers = removeNumbersFromOriginal(original);
             String translationWithoutNumbers = removeNumbersFromTranslation(translation);
-
-            System.out.println("translation: " + translation);
-            System.out.println("translation wo numbers: " + translationWithoutNumbers);
 
             if (translationExists(originalWithoutNumbers)) {
                 updateTranslation(originalWithoutNumbers, translationWithoutNumbers);
@@ -192,5 +191,53 @@ public class TranslationMemory implements Serializable {
         } else {
             return translation.replaceAll(SWEDISH_NUMBER, NUMBER_KEY);
         }
+    }
+
+    public String[] getClosestMatch(String sentence) {
+        String[] matchAndTranslation = new String[2];
+        matchAndTranslation[0] = "--%";
+        matchAndTranslation[1] = "";
+        int distance, maxLength;
+        int percentage;
+        double closestMatchPercentage = 0;
+        String closestMatchTranslation = "";
+
+        String currentKey, currentValue;
+
+        int sentenceLength = sentence.length();
+
+        boolean firstItem = true;
+
+        if(sentenceLength > 0) {
+            for (Map.Entry<String, String> set : translationMemory.entrySet()) {
+
+                currentKey = set.getKey();
+                currentValue = set.getValue();
+
+                maxLength = Math.max(sentenceLength, currentKey.length());
+                distance = DamerauLevenshteinDistance.damerauLevenshteinDistance(sentence, set.getKey());
+
+                percentage = ((100*(maxLength-distance))/maxLength);
+
+                if(firstItem){
+                    firstItem = false;
+                    closestMatchPercentage = percentage;
+                    closestMatchTranslation = currentValue;
+                }
+                else{
+                    if(percentage>closestMatchPercentage){
+                        closestMatchPercentage = percentage;
+                        closestMatchTranslation = currentValue;
+                    }
+                }
+            }
+        }
+
+        if(closestMatchPercentage > 90){
+            matchAndTranslation[0] = closestMatchPercentage + "%";
+            matchAndTranslation[1] = closestMatchTranslation;
+        }
+
+        return matchAndTranslation;
     }
 }

@@ -36,8 +36,8 @@ public class DataFrame implements Serializable {
         return dataFrame.size();
     }
 
-    public void addRow(String original, String translation, int paragraphIndex) {
-        dataFrame.add(new Row(original, translation, paragraphIndex));
+    public void addRow(String original, String match, String translation, int paragraphIndex) {
+        dataFrame.add(new Row(original, match, translation, paragraphIndex));
     }
 
     public Row getRow(int row) {

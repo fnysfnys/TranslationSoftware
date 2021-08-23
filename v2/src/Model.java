@@ -56,12 +56,13 @@ public class Model {
 
     public String[][] getTableData() {
         int rowCount = dataFrame.size();
-        String[][] tableData = new String[rowCount][2];
+        String[][] tableData = new String[rowCount][3];
         Row currentRow;
         for (int row = 0; row < rowCount; row++) {
             currentRow = dataFrame.getRow(row);
             tableData[row][0] = currentRow.getOriginal();
-            tableData[row][1] = currentRow.getTranslation();
+            tableData[row][1] = currentRow.getMatch();
+            tableData[row][2] = currentRow.getTranslation();
         }
         return tableData;
     }
@@ -103,7 +104,7 @@ public class Model {
         Row currentRow;
         for (int row = 0; row < rowCount; row++) {
             currentOriginal = (String) translationTable.getValueAt(row, 0);
-            currentTranslation = (String) translationTable.getValueAt(row, 1);
+            currentTranslation = (String) translationTable.getValueAt(row, 2);
 
             if(!(currentTranslation.equals(""))) {
                 currentRow = dataFrame.getRow(row);

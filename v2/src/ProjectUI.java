@@ -87,10 +87,11 @@ public class ProjectUI extends JFrame {
 
         tableData = model.getTableData();
 
-        tableModel.setDataVector(tableData, new String[]{"Original", "Row"});
+        tableModel.setDataVector(tableData, new String[]{"Original", "Match", "Translation"});
         translationTable = new JTable(tableModel);
 
         translationTable.setDefaultRenderer(String.class, new MultiLineTableCellRenderer());
+        
         createAutoSaveActionListener();
     }
 

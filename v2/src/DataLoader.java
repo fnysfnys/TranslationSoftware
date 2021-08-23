@@ -23,12 +23,20 @@ public class DataLoader {
         String paragraphText = paragraph.getText();
         String[] sentences = paragraphText.split("((?<=\\. ))");
         for (String sentence:sentences){
-            if(translationMemory.translationExists(sentence)){
-                dataFrame.addRow(sentence, translationMemory.getTranslation(sentence), paragraphIndex);
-            }
-            else {
-                dataFrame.addRow(sentence, "", paragraphIndex);
-            }
+            String[] matchAndTranslation = getMatchIfAny(sentence, translationMemory);
+            dataFrame.addRow(sentence, matchAndTranslation[0], matchAndTranslation[1], paragraphIndex);
+        }
+    }
+
+    private String[] getMatchIfAny(String sentence, TranslationMemory translationMemory) {
+        String[] matchAndTranslation = new String[2];
+        if(translationMemory.translationExists(sentence)){
+            matchAndTranslation[0] = "100%";
+            matchAndTranslation[1] = translationMemory.getTranslation(sentence);
+            return matchAndTranslation;
+        }
+        else{
+            return translationMemory.getClosestMatch(sentence);
         }
     }
 }

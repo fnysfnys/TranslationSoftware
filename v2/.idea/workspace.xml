@@ -20,7 +20,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0885ff7-a484-400d-988f-9dfa0413f529" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/EWORK-SWE-ENG.tmem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dddddd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dksjbnfjkdsbf.smartt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dsbkjldsbfjkdsbf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dsfsdfdsfdfsfds.smartt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ew210425_d.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ew210425_u.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fgregefregrtegrt.smartt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fuzzyMemory.tmem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fuzzyTest.smartt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rffdffffffffffffff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sjknfdskjfnbdsjkdsfdsfds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DamerauLevenshteinDistance.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compareMemory.tmem" beforeDir="false" afterPath="$PROJECT_DIR$/compareMemory.tmem" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/newMemTest.tmem" beforeDir="false" afterPath="$PROJECT_DIR$/newMemTest.tmem" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2/DataFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2/DataFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2/DataLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2/DataLoader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2/Model.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2/Model.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2/OldTranslationsDataLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2/OldTranslationsDataLoader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2/ProjectUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2/ProjectUI$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2/ProjectUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2/ProjectUI$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2/ProjectUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2/ProjectUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2/Row.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2/Row.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2/TranslationMemory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2/TranslationMemory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OldTranslationsDataLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OldTranslationsDataLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProjectUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProjectUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Row.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Row.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TranslationMemory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TranslationMemory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.smartt" beforeDir="false" afterPath="$PROJECT_DIR$/test.smartt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +85,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -60,6 +93,13 @@
     <property name="aspect.path.notification.shown" value="true" />
   </component>
   <component name="RunManager" selected="Application.Main">
+    <configuration name="LockMatch" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="LockMatch" />
+      <module name="v2" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="v2" />
@@ -74,13 +114,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -88,6 +130,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.LockMatch" />
         <item itemvalue="Application.SwingTester" />
       </list>
     </recent_temporary>
@@ -101,6 +144,7 @@
       <option name="presentableId" value="Default" />
       <updated>1627898881711</updated>
       <workItem from="1627898885545" duration="7590000" />
+      <workItem from="1629454015637" duration="12486000" />
     </task>
     <servers />
   </component>
@@ -119,26 +163,41 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="WindowStateProjectService">
-    <state width="1351" height="77" key="GridCell.Tab.0.bottom" timestamp="1627990925966">
-      <screen x="0" y="25" width="3440" height="1319" />
+    <state width="1398" height="492" key="GridCell.Tab.0.bottom" timestamp="1629747594685">
+      <screen x="0" y="25" width="1440" height="779" />
     </state>
+    <state width="1398" height="492" key="GridCell.Tab.0.bottom/0.25.1440.779@0.25.1440.779" timestamp="1629747594685" />
+    <state width="1617" height="492" key="GridCell.Tab.0.bottom/0.25.3440.1312@0.25.3440.1312" timestamp="1629633274963" />
     <state width="1351" height="77" key="GridCell.Tab.0.bottom/0.25.3440.1319@0.25.3440.1319" timestamp="1627990925966" />
-    <state width="1351" height="77" key="GridCell.Tab.0.center" timestamp="1627990925965">
-      <screen x="0" y="25" width="3440" height="1319" />
+    <state width="1398" height="492" key="GridCell.Tab.0.center" timestamp="1629747594684">
+      <screen x="0" y="25" width="1440" height="779" />
     </state>
+    <state width="1398" height="492" key="GridCell.Tab.0.center/0.25.1440.779@0.25.1440.779" timestamp="1629747594684" />
+    <state width="1617" height="492" key="GridCell.Tab.0.center/0.25.3440.1312@0.25.3440.1312" timestamp="1629633274961" />
     <state width="1351" height="77" key="GridCell.Tab.0.center/0.25.3440.1319@0.25.3440.1319" timestamp="1627990925965" />
-    <state width="1351" height="77" key="GridCell.Tab.0.left" timestamp="1627990925965">
-      <screen x="0" y="25" width="3440" height="1319" />
+    <state width="1398" height="492" key="GridCell.Tab.0.left" timestamp="1629747594684">
+      <screen x="0" y="25" width="1440" height="779" />
     </state>
+    <state width="1398" height="492" key="GridCell.Tab.0.left/0.25.1440.779@0.25.1440.779" timestamp="1629747594684" />
+    <state width="1617" height="492" key="GridCell.Tab.0.left/0.25.3440.1312@0.25.3440.1312" timestamp="1629633274959" />
     <state width="1351" height="77" key="GridCell.Tab.0.left/0.25.3440.1319@0.25.3440.1319" timestamp="1627990925965" />
-    <state width="1351" height="77" key="GridCell.Tab.0.right" timestamp="1627990925966">
-      <screen x="0" y="25" width="3440" height="1319" />
+    <state width="1398" height="492" key="GridCell.Tab.0.right" timestamp="1629747594685">
+      <screen x="0" y="25" width="1440" height="779" />
     </state>
+    <state width="1398" height="492" key="GridCell.Tab.0.right/0.25.1440.779@0.25.1440.779" timestamp="1629747594685" />
+    <state width="1617" height="492" key="GridCell.Tab.0.right/0.25.3440.1312@0.25.3440.1312" timestamp="1629633274962" />
     <state width="1351" height="77" key="GridCell.Tab.0.right/0.25.3440.1319@0.25.3440.1319" timestamp="1627990925966" />
     <state x="1848" y="140" width="1592" height="1047" maximized="true" key="dock-window-1" timestamp="1627925732343">
       <screen x="0" y="25" width="3440" height="1319" />
     </state>
     <state x="1848" y="140" width="1592" height="1047" maximized="true" key="dock-window-1/0.25.3440.1319@0.25.3440.1319" timestamp="1627925732343" />
+    <state x="744" y="345" width="670" height="676" key="search.everywhere.popup" timestamp="1629370791091">
+      <screen x="0" y="25" width="3440" height="1312" />
+    </state>
+    <state x="744" y="345" width="670" height="676" key="search.everywhere.popup/0.25.3440.1312@0.25.3440.1312" timestamp="1629370791091" />
   </component>
 </project>
