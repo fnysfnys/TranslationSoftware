@@ -20,39 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0885ff7-a484-400d-988f-9dfa0413f529" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/EWORK-SWE-ENG.tmem" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dddddd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dksjbnfjkdsbf.smartt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dsbkjldsbfjkdsbf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dsfsdfdsfdfsfds.smartt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ew210425_d.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ew210425_u.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fgregefregrtegrt.smartt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fuzzyMemory.tmem" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fuzzyTest.smartt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rffdffffffffffffff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sjknfdskjfnbdsjkdsfdsfds" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DamerauLevenshteinDistance.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eWorkShortEnglish.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eWorkShortSwedish.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/exportedEWorkEnglish" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testingShortEWork.smartt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compareMemory.tmem" beforeDir="false" afterPath="$PROJECT_DIR$/compareMemory.tmem" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/newMemTest.tmem" beforeDir="false" afterPath="$PROJECT_DIR$/newMemTest.tmem" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/v2/DataFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2/DataFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/v2/DataLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2/DataLoader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/v2/Model.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2/Model.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/v2/OldTranslationsDataLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2/OldTranslationsDataLoader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/v2/ProjectUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2/ProjectUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/v2/ProjectUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2/ProjectUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/v2/ProjectUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2/ProjectUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/v2/Row.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2/Row.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/v2/TranslationMemory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2/TranslationMemory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/OldTranslationsDataLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OldTranslationsDataLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProjectUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProjectUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Row.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Row.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TranslationMemory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TranslationMemory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.smartt" beforeDir="false" afterPath="$PROJECT_DIR$/test.smartt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fuzzyMemory.tmem" beforeDir="false" afterPath="$PROJECT_DIR$/fuzzyMemory.tmem" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,19 +87,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -145,6 +105,7 @@
       <updated>1627898881711</updated>
       <workItem from="1627898885545" duration="7590000" />
       <workItem from="1629454015637" duration="12486000" />
+      <workItem from="1629892542354" duration="526000" />
     </task>
     <servers />
   </component>
