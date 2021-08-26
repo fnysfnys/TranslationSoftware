@@ -15,7 +15,7 @@ open source translation software with translation memory (Work in progress)
 * Handle dependancies with Maven rather than manually
 * Check for if you can auto translate fragments of a sentence
 * Auto translate if only one word has changed
-* Implement fuzzy matching with levenstein distance
+* ~~Implement fuzzy matching with levenstein distance~~
 * ~~check for string numbers e.g. (ett, två, etc.)~~
 * ~~fix bug where numbers arent found and hash stays when taken from memory~~
 
